@@ -12,9 +12,13 @@ if($check=='')
 <?php
 
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\URL;
+// $users = array();
 $id = Session()->get('id');
 $UserData = UserController::getUserById($id);
 $users = json_decode($UserData,true);
+// echo '<pre>';
+// print_r($users);die('dd');
 ?>
 <!doctype html>
 <html lang="en">
@@ -23,26 +27,26 @@ $users = json_decode($UserData,true);
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--favicon-->
-	<link rel="icon" href="images/favicon.png" type="image/png"/>
+	<link rel="icon" href="{{URL::asset('images/favicon.png')}}" type="image/png"/>
 	<!--plugins-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link href="assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet"/>
-	<link href="assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
-	<link href="assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
-	<link href="assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet"/>
+	<link href="{{URL::asset('assets/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet"/>
+	<link href="{{URL::asset('assets/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
+	<link href="{{URL::asset('assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet" />
+	<link href="{{URL::asset('assets/plugins/metismenu/css/metisMenu.min.css')}}" rel="stylesheet"/>
 	<!-- loader-->
-	<link href="assets/css/pace.min.css" rel="stylesheet"/>
-	<script src="assets/js/pace.min.js"></script>
+	<link href="{{URL::asset('assets/css/pace.min.css')}}" rel="stylesheet"/>
+	<script src="{{URL::asset('assets/js/pace.min.js')}}"></script>
 	<!-- Bootstrap CSS -->
-	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
-	<link href="assets/css/bootstrap-extended.css" rel="stylesheet">
+	<link href="{{URL::asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
+	<link href="{{URL::asset('assets/css/bootstrap-extended.css')}}" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
-	<link href="assets/css/app.css" rel="stylesheet">
-	<link href="assets/css/icons.css" rel="stylesheet">
+	<link href="{{URL::asset('assets/css/app.css')}}" rel="stylesheet">
+	<link href="{{URL::asset('assets/css/icons.css')}}" rel="stylesheet">
 	<!-- Theme Style CSS -->
-	<link rel="stylesheet" href="assets/css/dark-theme.css"/>
-	<link rel="stylesheet" href="assets/css/semi-dark.css"/>
-	<link rel="stylesheet" href="assets/css/header-colors.css"/>
+	<link rel="stylesheet" href="{{URL::asset('assets/css/dark-theme.css')}}"/>
+	<link rel="stylesheet" href="{{URL::asset('assets/css/semi-dark.css')}}"/>
+	<link rel="stylesheet" href="{{URL::asset('assets/css/header-colors.css')}}"/>
 	<title>CRM - Magnete Technologies Pvt. Ltd.</title>
 </head>
 
@@ -53,7 +57,7 @@ $users = json_decode($UserData,true);
 		<div class="sidebar-wrapper" data-simplebar="true">
 			<div class="sidebar-header">
 				<div>
-					<img src="images/crm_magnete_technologies_logo.png" class="logo-icon" alt="logo icon">
+					<img src="{{URL::asset('images/crm_magnete_technologies_logo.png')}}" class="logo-icon" alt="logo icon">
 				</div>
 				<div>
 					<h4 class="logo-text">MAGNETE</h4>
@@ -806,7 +810,7 @@ $users = json_decode($UserData,true);
 					</div>
 					<div class="user-box dropdown">
 						<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<img src="<?php echo $users['data'][0]['profile_photo_path']?>" class="user-img" alt="user avatar">
+							<img src="<?php if($users['data'][0]['profile_photo_path']!=''){echo URL::asset($users['data'][0]['profile_photo_path']);}else{ echo '{{URL::asset("images/avatar.png")}}'; } ?>" class="user-img" alt="user avatar">
 							<div class="user-info ps-3">
 								<p class="user-name mb-0"><?php echo $users['data'][0]['name']?></p>
 								<p class="designattion mb-0"><?php echo $users['data'][0]['designation']?></p>

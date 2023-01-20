@@ -82,7 +82,7 @@ $users = json_decode($UserData,true);
 								</div>
 							</div>
 							<div class="col-lg-8">
-								<form action="/UpdateUser" method="post" enctype="multipart/form-data">
+								<form action="/UpdateProfile" method="post" enctype="multipart/form-data">
                                     @csrf
                                 <div class="card">
 									<div class="card-body">
@@ -145,7 +145,7 @@ $users = json_decode($UserData,true);
 										<div class="row">
 											<div class="col-sm-3"></div>
 											<div class="col-sm-9 text-secondary">
-												<input type="submit" class="btn btn-primary px-4" value="Save Changes" />
+												<input type="submit" class="btn btn-primary px-4" value="Update Profile" />
 											</div>
 										</div>
 									</div>

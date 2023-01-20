@@ -2,7 +2,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
-
+use Illuminate\Support\Facades\Crypt;
 $UserList = UserController::getAllUsers();
 $Users = json_decode($UserList,true);
 
@@ -76,7 +76,7 @@ $Users = json_decode($UserList,true);
                                 <th>Mobile Number</th>
                                 <th>Email ID</th>
                                 <th>Designation</th>
-                                <th>Address</th>
+                                <th>Status</th>
                                 <th>Profile Photo</th>
                                 <th>Action</th>
                             </tr>
@@ -94,9 +94,9 @@ $Users = json_decode($UserList,true);
                                                 <td>{{$user['mobile']}}</td>
                                                 <td>{{$user['email']}}</td>
                                                 <td>{{$user['designation']}}</td>
-                                                <td>{{$user['address']}}</td>
-                                                <td><img src="{{$user['profile_photo_path']}}" class="product-img-2" alt="product img"></td>
-                                                <td><a href=""><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                                                <td>{{$user['status']}}</td>
+                                                <td><img src="<?php if($user['profile_photo_path']!=''){echo $user['profile_photo_path'];}else{echo 'images/avatar.png';}?>" class="product-img-2" alt="product img"></td>
+                                                <td><a href="EditUser/<?php echo Crypt::encryptString($user['id']);?>"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                                             </tr>
                                         <?php
                                     }

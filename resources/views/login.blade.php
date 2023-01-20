@@ -38,7 +38,7 @@ if($check!='')
 
 <body class="">
 	<!--wrapper-->
-	@include('layout.alert')
+	
 	<div class="wrapper">
 		<div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
 			<div class="container">
@@ -46,6 +46,7 @@ if($check!='')
 					<div class="col mx-auto">
 						<div class="card mb-0">
 							<div class="card-body">
+							@include('layout.alert')
 								<div class="p-4">
 									<div class="mb-3 text-center">
 										<img src="images/crm_magnete_technologies_logo.png" width="60" alt="" />
@@ -59,12 +60,12 @@ if($check!='')
                                             @csrf
 											<div class="col-12">
 												<label for="inputEmailAddress" class="form-label">Email</label>
-												<input type="email" class="form-control" id="inputEmailAddress" placeholder="Enter Email" name="email">
+												<input type="email" class="form-control" id="inputEmailAddress" placeholder="Enter Email" name="email" required>
 											</div>
 											<div class="col-12">
 												<label for="inputChoosePassword" class="form-label">Password</label>
 												<div class="input-group" id="show_hide_password">
-													<input type="password" class="form-control border-end-0" name="password" id="inputChoosePassword" value="" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
+													<input type="password" class="form-control border-end-0" name="password" id="inputChoosePassword" value="" placeholder="Enter Password" required> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
 												</div>
 											</div>
 											<div class="col-md-6">
