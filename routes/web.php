@@ -45,3 +45,9 @@ Route::get('/AddUser',function(){
 Route::post('/CreateUser',[UserController::class,'CreateUser']);
 Route::get('/Logout',[UserController::class,'LogoutUser']);
 Route::post('/UpdateUser',[UserController::class,'UpdateUser']);
+Route::get('/Permissions',function(){
+    return view('permissions');
+});
+Route::post('/permission',function(){
+    return view('permission_ajax');
+});

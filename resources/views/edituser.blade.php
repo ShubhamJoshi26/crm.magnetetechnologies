@@ -5,12 +5,12 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 // print_r($id);die('ddddddd');
-try {
-    $id = Crypt::decryptString($id);
-} catch (DecryptException $e) {
-    $users = '';
-}
-
+// try {
+//     $id = Crypt::decryptString($id);
+// } catch (DecryptException $e) {
+  
+//     $users = '';
+// }
 $UserData = UserController::getUserById($id);
 $usersdata = json_decode($UserData,true);
 if($usersdata['success']=='true')
@@ -71,6 +71,7 @@ if($users!='')
               <div class="row g-3">
                 <div class="col-12 col-lg-6">
                   @csrf
+                  <input type="hidden" name="userid" id="userid" value="<?php echo $userDetails['id'];?>">
                   <label for="FisrtName" class="form-label">User Name</label>
                   <input type="text" class="form-control" id="FisrtName" placeholder="First Name" name="name" value="<?php if($userDetails['name']!=''){echo $userDetails['name'];}?>">
                 </div>

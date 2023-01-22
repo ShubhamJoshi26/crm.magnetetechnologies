@@ -26,6 +26,7 @@ $users = json_decode($UserData,true);
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<!--favicon-->
 	<link rel="icon" href="{{URL::asset('images/favicon.png')}}" type="image/png"/>
 	<!--plugins-->
@@ -398,12 +399,27 @@ $users = json_decode($UserData,true);
 					</a>
 				</li>
 				<li>
-					<a href="/Users">
+					<a href="javascript:();" class="has-arrow">
+						<div class="parent-icon"><i class="fa fa-user-circle"></i>
+						</div>
+						<div class="menu-title">Users</div>
+					</a>
+					<ul>
+					    <li> <a href="/Users"><i class="fa fa-angle-right"></i>User List</a></li>
+						<li> <a href="/Permissions"><i class="fa fa-angle-right"></i>User Permissions</a></li>
+						<!-- <li> <a href="#"><i class="fa fa-angle-right"></i>Employees Settings</a></li>
+						<li> <a href="#"><i class="fa fa-angle-right"></i>Email  Settings</a></li>
+						<li> <a href="#"><i class="fa fa-angle-right"></i>Payment Settings</a></li>
+						<li> <a href="#"><i class="fa fa-angle-right"></i>Website Settings</a></li> -->
+					</ul>
+				</li>
+				<!-- <li>
+					<a href="">
 						<div class="parent-icon"><i class="fa fa-user-circle"></i>
 						</div>
 						<div class="menu-title">User</div>
 					</a>
-				</li>
+				</li> -->
 
 
 				<li>

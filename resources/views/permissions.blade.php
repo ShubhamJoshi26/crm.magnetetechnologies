@@ -1,8 +1,8 @@
 @include('layout.header')
-<?php
 
+<?php
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Crypt;
+
 $UserList = UserController::getAllUsers();
 $Users = json_decode($UserList,true);
 
@@ -21,13 +21,13 @@ $Users = json_decode($UserList,true);
                                 <i class="bx bx-home-alt"></i>
                             </a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">User List</li>
+                        <li class="breadcrumb-item active" aria-current="page">User Permissions</li>
                     </ol>
                 </nav>
             </div>
             <div class="ms-auto">
                 <div class="btn-group">
-                    <a href="/AddUser"><button type="button" class="btn btn-primary">Add User</button></a>
+                    <!-- <a href="/AddUser"><button type="button" class="btn btn-primary">Add User</button></a> -->
                     <!-- <button type="button" class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">
                         <span class="visually-hidden">Toggle Dropdown</span>
                     </button>
@@ -72,12 +72,8 @@ $Users = json_decode($UserList,true);
                         <thead class="table-light">
                             <tr>
                                 <th>User ID</th>
-                                <th>Name</th>
-                                <th>Mobile Number</th>
-                                <th>Email ID</th>
-                                <th>Designation</th>
-                                <th>Status</th>
-                                <th>Profile Photo</th>
+                                <th>User Name</th>
+                                <th>Given Modules</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -91,12 +87,8 @@ $Users = json_decode($UserList,true);
                                             <tr>
                                                 <td>{{$user['id']}}</td>
                                                 <td>{{$user['name']}}</td>
-                                                <td>{{$user['mobile']}}</td>
-                                                <td>{{$user['email']}}</td>
-                                                <td>{{$user['designation']}}</td>
-                                                <td>{{$user['status']}}</td>
-                                                <td><img src="<?php if($user['profile_photo_path']!=''){echo $user['profile_photo_path'];}else{echo 'images/avatar.png';}?>" class="product-img-2" alt="product img"></td>
-                                                <td><a href="EditUser/<?php echo $user['id'];?>"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                                                <td></td>
+                                                <td><a href="javascript:void(0)" onclick="EditPermission(<?php echo $user['id']?>);"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                                             </tr>
                                         <?php
                                     }
@@ -117,10 +109,23 @@ $Users = json_decode($UserList,true);
         <!-- Listing Code End -->
     </div>
 </div>
-
-
-
-
+<div class="modal" tabindex="-1" id="permission_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">User Permissions</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="permission_table">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 @include('layout.footer')

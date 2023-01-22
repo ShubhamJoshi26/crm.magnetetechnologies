@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -134,6 +135,7 @@ class UserController extends Controller
         $status = $data->status;
         $address = $data->address;
         $id = $data->userid;
+        
         // $password = md5($data->password);
         // $user_photo = $data->user_photo;
         // $created_at = time();
@@ -155,13 +157,18 @@ class UserController extends Controller
         }
         if($AddUserData==1)
         {  
-            $id = Crypt::encryptString($data->userid);
-            return redirect('/EditUser/'.$id.'',302,['id'=>$data->userid])->with('success', 'User Added Successfully');
+           
+            return redirect('/EditUser/'.$id.'',302,['id'=>$data->userid])->with('success', 'User Updated Successfully');
         }
         else
         {
-            $id = Crypt::encryptString($data->userid);
-            return redirect('/EditUser/'.$id.'',302,['id'=>$data->userid])->with('error', 'User Not Added');
+            
+            return redirect('/EditUser/'.$id.'',302,['id'=>$data->userid])->with('error', 'User Not Updated');
         }
+    }
+    public static function getAllModules()
+    {
+        $Module = DB::select('Select * from `module`');
+        return json_encode(array('success'=>'true','data'=>$Module,'error_code'=>'10001'));
     }
 }
