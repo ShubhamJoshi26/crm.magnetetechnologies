@@ -32,13 +32,23 @@ Route::get('/Users',function(){
 Route::get('/UserProfile',function(){
     return view('user-profile');
 });
-Route::post('/UpdateUser',[UserController::class,'UpdateUser']);
+Route::post('/UpdateProfile',[UserController::class,'UpdateProfile']);
 Route::get('/CustomersList', function (){
     return view('/customerlist');
 });
-Route::get('/EditUser/{id}',[UserController::class,'EditUser']);
+Route::get('/EditUser/{id}',function($id){
+    return view('edituser',['id'=>$id]);
+});
 Route::get('/AddUser',function(){
     return view('adduser');
 });
 Route::post('/CreateUser',[UserController::class,'CreateUser']);
 Route::get('/Logout',[UserController::class,'LogoutUser']);
+Route::post('/UpdateUser',[UserController::class,'UpdateUser']);
+Route::get('/Permissions',function(){
+    return view('permissions');
+});
+Route::post('/permission',function(){
+    return view('permission_ajax');
+});
+Route::post('/UpdateUserPermission',[UserController::class,'UpdateUserPermissions']);

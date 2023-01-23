@@ -3,6 +3,28 @@
 
 use App\Http\Controllers\UserController;
 $id = Session()->get('id');
+$permission = UserController::getUserPermissionByName('user',$id);
+$permissionarr = json_decode($permission, true);
+print_r($permissionarr);
+if($permissionarr['success']=='false')
+{?>
+<div class="page-wrapper">
+			<div class="page-content">
+				<!--breadcrumb-->
+				
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>You Are Not Authorized Person For This Module</strong>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+                </div>
+                
+			</div>
+		</div>
+<?php  return false; }
+
+?>
+<?php
+
+$id = Session()->get('id');
 $UserData = UserController::getUserById($id);
 $users = json_decode($UserData,true);
 ?>
@@ -82,7 +104,7 @@ $users = json_decode($UserData,true);
 								</div>
 							</div>
 							<div class="col-lg-8">
-								<form action="/UpdateUser" method="post" enctype="multipart/form-data">
+								<form action="/UpdateProfile" method="post" enctype="multipart/form-data">
                                     @csrf
                                 <div class="card">
 									<div class="card-body">
@@ -145,7 +167,7 @@ $users = json_decode($UserData,true);
 										<div class="row">
 											<div class="col-sm-3"></div>
 											<div class="col-sm-9 text-secondary">
-												<input type="submit" class="btn btn-primary px-4" value="Save Changes" />
+												<input type="submit" class="btn btn-primary px-4" value="Update Profile" />
 											</div>
 										</div>
 									</div>
