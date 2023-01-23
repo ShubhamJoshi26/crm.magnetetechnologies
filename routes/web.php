@@ -51,3 +51,4 @@ Route::get('/Permissions',function(){
 Route::post('/permission',function(){
     return view('permission_ajax');
 });
+Route::post('/UpdateUserPermission',[UserController::class,'UpdateUserPermissions']);

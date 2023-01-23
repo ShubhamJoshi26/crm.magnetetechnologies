@@ -171,4 +171,69 @@ class UserController extends Controller
         $Module = DB::select('Select * from `module`');
         return json_encode(array('success'=>'true','data'=>$Module,'error_code'=>'10001'));
     }
+    function UpdateUserPermissions(Request $UserPermissionData)
+    {
+       $permissions = $UserPermissionData->request->all();
+       echo '<pre>';
+       $moduledata = self::getAllModules();
+       $modules = json_decode($moduledata,true);
+       // $moduleforcheck = array();
+       foreach($modules['data'] as $module)
+       {
+           $moduleforcheck[] = $module['modulename'];
+       }
+       
+       foreach($permissions['permission'] as $key=> $permission)
+       {
+           $checkpermission = DB::select('select * from permissions where `userid`='.$permissions['userid'].' and `permissionname`="'.$key.'"');
+           if(count($checkpermission)==0)
+           {
+                $createduser = Session()->get('id');
+                $Addpermission = DB::select('insert into permissions (`permissionname`,`userid`,`modulename`,`created_by`,`updated_by`,`created_at`,`updated_at`) values ("'.$key.'","'.$permissions['userid'].'","'.$key.'","'.$createduser.'","'.$createduser.'","'.time().'","'.time().'")');
+           }
+           
+       }
+       foreach($moduleforcheck as $modulecheck)
+        {
+            
+            if(!key_exists($modulecheck,$permissions['permission']))
+            {  
+                $deletepermission = DB::select('delete from permissions where `userid`='.$permissions['userid'].' and `permissionname`="'.$modulecheck.'"');
+                print_r($deletepermission);
+            }
+        }
+         return redirect('/Permissions')->with('success','Permission Updated Successfully'); 
+      
+      
+    }
+    public static function getUserPermissions($id)
+    {
+        if($id!='')
+        {
+            $permissions = DB::table('permissions')->where('userid','=',$id)->get();
+            if(!empty($permissions[0]) && $permissions[0]->permissionid!='')
+        {
+            return json_encode(array('success'=>'true','data'=>$permissions,'error_code'=>'10001'));
+        }
+        else
+        {
+            return json_encode(array('success'=>'false','data'=>'','error_code'=>'10001')); 
+        }
+        }
+    }
+    public static function getUserPermissionByName($name,$userid)
+    {
+        if($name!='' && $userid!='')
+        {
+            $permissioncount = DB::table('permissions')->where('permissionname','=',$name)->where('userid','=',$userid)->count();
+            if($permissioncount>0)
+            {
+                return json_encode(array('success'=>'true','data'=>$permissioncount,'error_code'=>'1003'));
+            }
+            else
+            {
+                return json_encode(array('success'=>'false','data'=>'','error_code'=>'1004'));
+            }
+        }
+    }
 }

@@ -1,7 +1,28 @@
 @include('layout.header')
-
 <?php
+
 use App\Http\Controllers\UserController;
+$id = Session()->get('id');
+$permission = UserController::getUserPermissionByName('user',$id);
+$permissionarr = json_decode($permission, true);
+print_r($permissionarr);
+if($permissionarr['success']=='false')
+{?>
+<div class="page-wrapper">
+			<div class="page-content">
+				<!--breadcrumb-->
+				
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>You Are Not Authorized Person For This Module</strong>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+                </div>
+                
+			</div>
+		</div>
+<?php  return false; }
+
+?>
+<?php
 
 $UserList = UserController::getAllUsers();
 $Users = json_decode($UserList,true);
@@ -83,11 +104,18 @@ $Users = json_decode($UserList,true);
                                 {
                                     foreach($Users['data'] as $user)
                                     {
+                                        $userpermission = array();
+                                        $userpermissions = UserController::getUserPermissions($user['id']);
+                                        $permission = json_decode($userpermissions,true);
+                                        if($permission['success']=='true')
+                                        {
+                                            $userpermission = $permission['data'];
+                                        }
                                         ?>
                                             <tr>
                                                 <td>{{$user['id']}}</td>
                                                 <td>{{$user['name']}}</td>
-                                                <td></td>
+                                                <td><?php foreach($userpermission as $up){echo ucfirst($up['permissionname']).', ';}?></td>
                                                 <td><a href="javascript:void(0)" onclick="EditPermission(<?php echo $user['id']?>);"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                                             </tr>
                                         <?php
@@ -111,19 +139,21 @@ $Users = json_decode($UserList,true);
 </div>
 <div class="modal" tabindex="-1" id="permission_modal">
   <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">User Permissions</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" id="permission_table">
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
+    <form action="/UpdateUserPermission" method="post">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">User Permissions</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="permission_table">
+            
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+        </div>
+    </form>
   </div>
 </div>
 

@@ -1,6 +1,29 @@
 @include('layout.header')
 <?php
 
+use App\Http\Controllers\UserController;
+$id = Session()->get('id');
+$permission = UserController::getUserPermissionByName('customers',$id);
+$permissionarr = json_decode($permission, true);
+
+if($permissionarr['success']=='false')
+{?>
+<div class="page-wrapper">
+			<div class="page-content">
+				<!--breadcrumb-->
+				
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>You Are Not Authorized Person For This Module</strong>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+                </div>
+                
+			</div>
+		</div>
+<?php  return false; }
+
+?>
+<?php
+
 use App\Http\Controllers\CustomerController;
 
 $CustomerList = CustomerController::getCustomerList();
