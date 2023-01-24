@@ -6,11 +6,13 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
     function Login(Request $data)
     {
+        Log::info('Login',array('data'=>$data));
         if($data->email!='' && $data->password!='')
         {
             $UserData = DB::table('users')->where('email','=',$data->email)->where('password','=',md5($data->password))->get();
@@ -25,11 +27,13 @@ class UserController extends Controller
             
                if(!empty($user) && $user['id']!='')
                {
+                   Log::info('Login Data Fetched',array('userdata'=>$user));
                    session()->put(['user_status'=>'logedin','name'=>$user['name'],'id'=>$user['id'],'email'=>$user['email']]);
                    return redirect('/',302,['users'=>$UserData])->with('success','Login Successfull');
                }
                else
                {
+                   Log::alert('Login Invalid',array('data'=>''));
                    return redirect('/Login')->with('error','Invalid UserId or Password');
                }
         }
@@ -63,16 +67,20 @@ class UserController extends Controller
         $designation = $UserUpdateData->designation;
         $mobile = $UserUpdateData->mobile;
         $address = $UserUpdateData->address;
+        $github = $UserUpdateData->github;
+        $twitter = $UserUpdateData->twitter;
+        $instagram = $UserUpdateData->instagram;
+        $facebook = $UserUpdateData->facebook;
         if(!empty($_FILES) && $_FILES['profile_photo']['name']!='')
         {
             $imageName = time().'.'.$UserUpdateData->profile_photo->extension();  
             $UserUpdateData->profile_photo->move(public_path('uploads/userprofile'), $imageName);
             $path = 'uploads/userprofile/'.$imageName;
-            $UpdateUser = DB::table('users')->where('id','=',$id)->update(['name'=>$name,'email'=>$email,'designation'=>$designation,'mobile'=>$mobile,'address'=>$address,'profile_photo_path'=>$path]);
+            $UpdateUser = DB::table('users')->where('id','=',$id)->update(['name'=>$name,'email'=>$email,'designation'=>$designation,'mobile'=>$mobile,'address'=>$address,'profile_photo_path'=>$path,'github'=>$github,'twitter'=>$twitter,'instagram'=>$instagram,'facebook'=>$facebook]);
         }
         else
         {
-            $UpdateUser = DB::table('users')->where('id','=',$id)->update(['name'=>$name,'email'=>$email,'designation'=>$designation,'mobile'=>$mobile,'address'=>$address]);
+            $UpdateUser = DB::table('users')->where('id','=',$id)->update(['name'=>$name,'email'=>$email,'designation'=>$designation,'mobile'=>$mobile,'address'=>$address,'github'=>$github,'twitter'=>$twitter,'instagram'=>$instagram,'facebook'=>$facebook]);
         }
         if($UpdateUser==1)
         {
@@ -223,15 +231,18 @@ class UserController extends Controller
     }
     public static function getUserPermissionByName($name,$userid)
     {
+        Log::info('getUserPermissionByName',array('data'=>array('name'=>$name,'userid'=>$userid)));
         if($name!='' && $userid!='')
         {
             $permissioncount = DB::table('permissions')->where('permissionname','=',$name)->where('userid','=',$userid)->count();
             if($permissioncount>0)
             {
+                Log::info('getUserPermissionByName Permission data found',array('data'=>$permissioncount));
                 return json_encode(array('success'=>'true','data'=>$permissioncount,'error_code'=>'1003'));
             }
             else
             {
+                Log::alert('getUserPermissionByName Permission data found',array('data'=>array('name'=>$name,'userid'=>$userid)));
                 return json_encode(array('success'=>'false','data'=>'','error_code'=>'1004'));
             }
         }

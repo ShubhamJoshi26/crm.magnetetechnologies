@@ -57,11 +57,11 @@ $users = json_decode($UserData, true);
 		<div class="sidebar-wrapper" data-simplebar="true">
 			<div class="sidebar-header">
 				<div>
-					<img src="{{URL::asset('images/crm_magnete_technologies_logo.png')}}" class="logo-icon" alt="logo icon">
+					<a href="{{URL::to('/')}}"><img src="{{URL::asset('images/crm_magnete_technologies_logo.png')}}" class="logo-icon" alt="logo icon"></a>
 				</div>
 				<div>
-					<h4 class="logo-text">MAGNETE</h4>
-					<p class="text-left logo-text"><small>TECHNOLOGIES</small></p>
+					<a href="{{URL::to('/')}}"><h4 class="logo-text">MAGNETE</h4></a>
+					<a href="{{URL::to('/')}}"><p class="text-left logo-text"><small>TECHNOLOGIES</small></p></a>
 				</div>
 
 				<div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
@@ -258,7 +258,7 @@ $users = json_decode($UserData, true);
 					</li>
 				<?php }
 				?>
-				<?php $permission = UserController::getUserPermissionByName('ticket', $id);
+				<?php $permission = UserController::getUserPermissionByName('tickets', $id);
 				$permissionarr = json_decode($permission, true);
 				if ($permissionarr['success'] == 'true') { ?>
 					<li>
