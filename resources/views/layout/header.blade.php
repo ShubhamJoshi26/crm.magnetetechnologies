@@ -509,7 +509,7 @@ $users = json_decode($UserData, true);
 				$permissionarr = json_decode($permission, true);
 				if ($permissionarr['success'] == 'true') { ?>
 					<li>
-						<a href="#">
+						<a href="/department">
 							<div class="parent-icon"><i class="fa fa-tree"></i>
 							</div>
 							<div class="menu-title">Departments</div>
