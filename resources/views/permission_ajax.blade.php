@@ -14,8 +14,9 @@ if($userid!='')
     $permission = json_decode($UserPermission,true);
     if(isset($permission['data']) && !empty($permission['data']))
     {
-        $permission = $permission['data'];
+        $permissions = $permission['data'];
     }
+   
 ?>
 @csrf
             <div>
@@ -48,12 +49,15 @@ if($userid!='')
                         foreach($ModuleList as $module)
                         {   
                             $checked = '';
-                            foreach($permission as $up)
+                            if($permission['success']=='true')
                             {
-                                if($up['permissionname'] == $module['modulename'])
+                                foreach($permissions as $up)
                                 {
-                                    $checked = 'checked';
-                                    
+                                    if($up['permissionname'] == $module['modulename'])
+                                    {
+                                        $checked = 'checked';
+                                        
+                                    }
                                 }
                             }
                             ?>

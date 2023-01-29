@@ -38,18 +38,28 @@ if($check!='')
 
 <body class="">
 	<!--wrapper-->
-	
 	<div class="wrapper">
-		<div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
-			<div class="container">
-				<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
-					<div class="col mx-auto">
-						<div class="card mb-0">
+		<div class="section-authentication-cover">
+			<div class="">
+				<div class="row g-0">
+
+					<div class="col-12 col-xl-7 col-xxl-8 auth-cover-left align-items-center justify-content-center d-none d-xl-flex">
+
+                        <div class="card shadow-none bg-transparent shadow-none rounded-0 mb-0">
 							<div class="card-body">
-							@include('layout.alert')
-								<div class="p-4">
+                                 <img src="{{URL::asset('assets/images/login-images/login-cover.svg')}}" class="img-fluid auth-img-cover-login" width="650" alt=""/>
+							</div>
+						</div>
+						
+					</div>
+
+					<div class="col-12 col-xl-5 col-xxl-4 auth-cover-right align-items-center justify-content-center">
+						<div class="card rounded-0 m-3 shadow-none bg-transparent mb-0">
+							<div class="card-body p-sm-5">
+								@include('layout.alert')
+								<div class="">
 									<div class="mb-3 text-center">
-										<img src="images/crm_magnete_technologies_logo.png" width="60" alt="" />
+										<img src="{{URL::asset('images/crm_magnete_technologies_logo.png')}}" width="60" alt="" />
 									</div>
 									<div class="text-center mb-4">
 										<h5 class="">Magenete Technologies</h5>
@@ -81,28 +91,29 @@ if($check!='')
 													<button type="submit" class="btn btn-primary">Sign in</button>
 												</div>
 											</div>
-											<div class="col-12">
+											<!-- <div class="col-12">
 												<div class="text-center ">
 													<p class="mb-0">Don't have an account yet? <a href="authentication-signup.html">Sign up here</a>
 													</p>
 												</div>
-											</div>
+											</div> -->
 										</form>
 									</div>
-									<div class="login-separater text-center mb-5"> <span>OR SIGN IN WITH</span>
-										<hr/>
+									<div class="login-separater text-center mb-5"> <span>Follow Us</span>
+										<hr>
 									</div>
 									<div class="list-inline contacts-social text-center">
-										<a href="javascript:;" class="list-inline-item bg-facebook text-white border-0 rounded-3"><i class="bx bxl-facebook"></i></a>
-										<a href="javascript:;" class="list-inline-item bg-twitter text-white border-0 rounded-3"><i class="bx bxl-twitter"></i></a>
-										<a href="javascript:;" class="list-inline-item bg-google text-white border-0 rounded-3"><i class="bx bxl-google"></i></a>
-										<a href="javascript:;" class="list-inline-item bg-linkedin text-white border-0 rounded-3"><i class="bx bxl-linkedin"></i></a>
+										<a href="https://www.instagram.com/magnetetechnologies/" class="list-inline-item bg-facebook text-white border-0 rounded-3"><i class="bx bxl-instagram"></i></a>
+										<!-- <a href="javascript:;" class="list-inline-item bg-twitter text-white border-0 rounded-3"><i class="bx bxl-twitter"></i></a>
+										<a href="javascript:;" class="list-inline-item bg-google text-white border-0 rounded-3"><i class="bx bxl-google"></i></a> -->
+										<a href="www.linkedin.com/in/magnete-technologies-148a26260" class="list-inline-item bg-linkedin text-white border-0 rounded-3"><i class="bx bxl-linkedin"></i></a>
 									</div>
 
 								</div>
 							</div>
 						</div>
 					</div>
+
 				</div>
 				<!--end row-->
 			</div>

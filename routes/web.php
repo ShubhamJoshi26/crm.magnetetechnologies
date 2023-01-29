@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DepartmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -52,3 +53,7 @@ Route::post('/permission',function(){
     return view('permission_ajax');
 });
 Route::post('/UpdateUserPermission',[UserController::class,'UpdateUserPermissions']);
+
+Route::get('/department',[DepartmentController::class,'Index']);
+Route::any('/department/create',[DepartmentController::class,'Create']);
+Route::any('/department/delete',[DepartmentController::class,'Delete']);

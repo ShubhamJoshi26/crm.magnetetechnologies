@@ -16,3 +16,25 @@ function EditPermission(id)
     })
  }
 }
+
+function deleteDepartment(id)
+{
+    if(id!='')
+    {
+        if(!confirm("Do you want to delete this department ?")) {
+            return false;
+          }
+          else
+          {
+            $.ajax({
+                url:'department/delete?id='+id,
+                type:'get',
+                success:function(suc)
+                {
+                    alert(suc);
+                    location.href='department';
+                }
+            })
+          }
+    }
+}
