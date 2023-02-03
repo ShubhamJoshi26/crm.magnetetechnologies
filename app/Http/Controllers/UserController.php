@@ -84,11 +84,11 @@ class UserController extends Controller
         }
         if($UpdateUser==1)
         {
-            return redirect('/UserProfile')->with('success', 'Profile Updated');
+            return redirect('/user/UserProfile')->with('success', 'Profile Updated');
         }
         else
         {
-            return redirect('/UserProfile')->with('error', 'Profile Not Updated');
+            return redirect('/user/UserProfile')->with('error', 'Profile Not Updated');
         }
     }
     public static function getAllUsers()
@@ -126,11 +126,11 @@ class UserController extends Controller
         }
         if($AddUserData==1)
         {
-            return redirect('/AddUser')->with('success', 'User Added Successfully');
+            return redirect('/user/AddUser')->with('success', 'User Added Successfully');
         }
         else
         {
-            return redirect('/AddUser')->with('error', 'User Not Added');
+            return redirect('/user/AddUser')->with('error', 'User Not Added');
         }
     }
     function UpdateUser(Request $data)
@@ -166,12 +166,12 @@ class UserController extends Controller
         if($AddUserData==1)
         {  
            
-            return redirect('/EditUser/'.$id.'',302,['id'=>$data->userid])->with('success', 'User Updated Successfully');
+            return redirect('/user/EditUser/'.$id.'',302,['id'=>$data->userid])->with('success', 'User Updated Successfully');
         }
         else
         {
             
-            return redirect('/EditUser/'.$id.'',302,['id'=>$data->userid])->with('error', 'User Not Updated');
+            return redirect('/user/EditUser/'.$id.'',302,['id'=>$data->userid])->with('error', 'User Not Updated');
         }
     }
     public static function getAllModules()
@@ -210,7 +210,7 @@ class UserController extends Controller
                 print_r($deletepermission);
             }
         }
-         return redirect('/Permissions')->with('success','Permission Updated Successfully'); 
+         return redirect('/permission/Permissions')->with('success','Permission Updated Successfully'); 
       
       
     }

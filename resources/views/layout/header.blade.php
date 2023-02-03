@@ -517,6 +517,20 @@ $users = json_decode($UserData, true);
 					</li>
 				<?php }
 				?>
+
+			<?php $permission = UserController::getUserPermissionByName('designation', $id);
+				$permissionarr = json_decode($permission, true);
+				if ($permissionarr['success'] == 'true') { ?>
+					<li>
+						<a href="/designation">
+							<div class="parent-icon"><i class="fa fa-user-circle"></i>
+							</div>
+							<div class="menu-title">Designation</div>
+						</a>
+					</li>
+				<?php }
+				?>
+
 				<?php $permission = UserController::getUserPermissionByName('training', $id);
 				$permissionarr = json_decode($permission, true);
 				if ($permissionarr['success'] == 'true') { ?>
