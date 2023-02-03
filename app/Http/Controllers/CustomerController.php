@@ -39,11 +39,11 @@ class CustomerController extends Controller
         }
         if($AddCustomerData==1)
         {
-            return redirect('/AddCustomer')->with('success', 'Client Added Successfully');
+            return redirect('/customer/AddCustomer')->with('success', 'Client Added Successfully');
         }
         else
         {
-            return redirect('/AddCustomer')->with('error', 'Client Not Added');
+            return redirect('/customer/AddCustomer')->with('error', 'Client Not Added');
         }
     }
     public static function getCustomerList()
