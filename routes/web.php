@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DesignationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -57,3 +58,6 @@ Route::post('/UpdateUserPermission',[UserController::class,'UpdateUserPermission
 Route::get('/department',[DepartmentController::class,'Index']);
 Route::any('/department/create',[DepartmentController::class,'Create']);
 Route::any('/department/delete',[DepartmentController::class,'Delete']);
+Route::get('/designation',[DesignationController::class,'Index']);
+Route::any('/designation/create',[DesignationController::class,'Create']);
+Route::any('/designation/delete',[DesignationController::class,'Delete']);

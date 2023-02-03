@@ -38,3 +38,25 @@ function deleteDepartment(id)
           }
     }
 }
+
+function deleteDesignation(id)
+{
+    if(id!='')
+    {
+        if(!confirm("Do you want to delete this designation ?")) {
+            return false;
+          }
+          else
+          {
+            $.ajax({
+                url:'designation/delete?id='+id,
+                type:'get',
+                success:function(suc)
+                {
+                    alert(suc);
+                    location.href='designation';
+                }
+            })
+          }
+    }
+}
