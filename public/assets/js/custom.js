@@ -60,3 +60,24 @@ function deleteDesignation(id)
           }
     }
 }
+function deleteEmployee(id)
+{
+    if(id!='')
+    {
+        if(!confirm("Do you want to delete this employee ?")) {
+            return false;
+          }
+          else
+          {
+            $.ajax({
+                url:'employee/delete?id='+id,
+                type:'get',
+                success:function(suc)
+                {
+                    alert(suc);
+                    location.href='employee';
+                }
+            })
+          }
+    }
+}
