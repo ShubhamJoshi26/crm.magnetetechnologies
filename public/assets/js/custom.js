@@ -81,3 +81,25 @@ function deleteEmployee(id)
           }
     }
 }
+
+function deleteModule(id)
+{
+    if(id!='')
+    {
+        if(!confirm("Do you want to delete this module ?")) {
+            return false;
+          }
+          else
+          {
+            $.ajax({
+                url:'module/delete?id='+id,
+                type:'get',
+                success:function(suc)
+                {
+                    alert(suc);
+                    location.href='module';
+                }
+            })
+          }
+    }
+}

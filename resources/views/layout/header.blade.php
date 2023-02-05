@@ -483,8 +483,8 @@ $users = json_decode($UserData, true);
 						<ul>
 							<li> <a href="/Users"><i class="fa fa-angle-right"></i>User List</a></li>
 							<li> <a href="/Permissions"><i class="fa fa-angle-right"></i>User Permissions</a></li>
-							<!-- <li> <a href="#"><i class="fa fa-angle-right"></i>Employees Settings</a></li>
-						<li> <a href="#"><i class="fa fa-angle-right"></i>Email  Settings</a></li>
+							 <li> <a href="/module"><i class="fa fa-angle-right"></i>Module</a></li>
+						<!--<li> <a href="#"><i class="fa fa-angle-right"></i>Email  Settings</a></li>
 						<li> <a href="#"><i class="fa fa-angle-right"></i>Payment Settings</a></li>
 						<li> <a href="#"><i class="fa fa-angle-right"></i>Website Settings</a></li> -->
 						</ul>
