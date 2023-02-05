@@ -2,8 +2,12 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Models\designation;
 
 $id = Session()->get('id');
+$alldesignation = designation::getRecords();
+$alldesignationarr = json_decode($alldesignation, true);
+$designationoptions = '<option value="0">--Select Designation--</option>';
 $permission = UserController::getUserPermissionByName('user', $id);
 $permissionarr = json_decode($permission, true);
 print_r($permissionarr);
@@ -74,7 +78,7 @@ $users = json_decode($UserData, true);
 										<img src="<?php echo $users['data'][0]['profile_photo_path']; ?>" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
 										<div class="mt-3">
 											<h4><?php echo $users['data'][0]['name']; ?></h4>
-											<p class="text-secondary mb-1"><?php echo $users['data'][0]['designation']; ?></p>
+											<p class="text-secondary mb-1"></p>
 											<!-- <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
 												<button class="btn btn-primary">Follow</button>
 												<button class="btn btn-outline-primary">Message</button> -->
@@ -154,7 +158,20 @@ $users = json_decode($UserData, true);
 											<h6 class="mb-0">Designation</h6>
 										</div>
 										<div class="col-sm-9 text-secondary">
-											<input type="text" name="designation" readonly class="form-control" value="<?php echo $users['data'][0]['designation']; ?>" />
+											<select name="designation" id="designation" class="form-select">
+												<?php
+												if ($alldesignationarr['success'] == 'true') {
+													foreach ($alldesignationarr['data'] as  $designation) {
+														$selectcheck = '';
+														if ($designation['id'] == $users['data'][0]['designation']) {
+															$selectcheck = 'selected="selected"';
+															$designationoptions = '<option ' . $selectcheck . ' value="' . $designation['id'] . '">' . $designation['name'] . '</option>';
+														}
+													}
+												}
+												echo $designationoptions;
+												?>
+											</select>
 										</div>
 									</div>
 									<div class="row mb-3">

@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\TicketController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,9 +65,13 @@ Route::any('/department/delete',[DepartmentController::class,'Delete']);
 Route::get('/designation',[DesignationController::class,'Index']);
 Route::any('/designation/create',[DesignationController::class,'Create']);
 Route::any('/designation/delete',[DesignationController::class,'Delete']);
+Route::get('/ticket',function(){return view('/ticket/allticket');});
+Route::any('/ticket/create',[TicketController::class,'create']);
+Route::any('/ticket/delete',[TicketController::class,'Delete']);
 Route::get('/employee',[EmployeeController::class,'Index']);
 Route::any('/employee/create',[EmployeeController::class,'Create']);
 Route::any('/employee/delete',[EmployeeController::class,'Delete']);
 Route::get('/module',[ModuleController::class,'Modules']);
 Route::any('/module/create',[ModuleController::class,'Create']);
 Route::any('/module/delete',[ModuleController::class,'Delete']);
+

@@ -1,4 +1,5 @@
 <?php
+
 $check = session()->has('user_status');
 // echo $check;
 // die('dd');
@@ -47,6 +48,18 @@ $users = json_decode($UserData, true);
 	<link rel="stylesheet" href="{{URL::asset('assets/css/dark-theme.css')}}" />
 	<link rel="stylesheet" href="{{URL::asset('assets/css/semi-dark.css')}}" />
 	<link rel="stylesheet" href="{{URL::asset('assets/css/header-colors.css')}}" />
+	<script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" type="text/css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.full.min.js"></script>
+<script>
+	$(function () {
+  $("select").select2();
+});
+        $('.datepicker').datepicker({
+            uiLibrary: 'bootstrap'
+        });
+    </script>
 	<title>CRM - Magnete Technologies Pvt. Ltd.</title>
 </head>
 
@@ -268,11 +281,11 @@ $users = json_decode($UserData, true);
 							<div class="menu-title">Tickets</div>
 						</a>
 						<ul>
-							<li> <a href="#"><i class="fa fa-angle-right"></i>All Tickets</a></li>
-							<li> <a href="#"><i class="fa fa-angle-right"></i>New Tickets</a></li>
-							<li> <a href="#"><i class="fa fa-angle-right"></i>Inprocess Tickets</a></li>
-							<li> <a href="#"><i class="fa fa-angle-right"></i>Closed Tickets</a></li>
-							<li> <a href="#"><i class="fa fa-angle-right"></i>Reopen Tickets</a></li>
+							<li> <a href="/ticket"><i class="fa fa-angle-right"></i>All Tickets</a></li>
+							<li> <a href="/ticket/new"><i class="fa fa-angle-right"></i>New Tickets</a></li>
+							<li> <a href="/ticket/inprocess"><i class="fa fa-angle-right"></i>Inprocess Tickets</a></li>
+							<li> <a href="/ticket/closed"><i class="fa fa-angle-right"></i>Closed Tickets</a></li>
+							<li> <a href="/ticket/reopen"><i class="fa fa-angle-right"></i>Reopen Tickets</a></li>
 						</ul>
 					</li>
 				<?php }
@@ -982,7 +995,7 @@ $users = json_decode($UserData, true);
 										} ?>" class="user-img" alt="user avatar">
 							<div class="user-info ps-3">
 								<p class="user-name mb-0"><?php echo $users['data'][0]['name'] ?></p>
-								<p class="designattion mb-0"><?php echo $users['data'][0]['designation'] ?></p>
+								<p class="designattion mb-0"></p>
 							</div>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-end">

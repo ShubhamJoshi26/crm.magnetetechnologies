@@ -70,7 +70,7 @@ if($check!='')
                                             @csrf
 											<div class="col-12">
 												<label for="inputEmailAddress" class="form-label">Email</label>
-												<input type="email" class="form-control" id="inputEmailAddress" placeholder="Enter Email" name="email" required>
+												<input type="text" class="form-control" id="inputEmailAddress" placeholder="Enter Email" name="email" required>
 											</div>
 											<div class="col-12">
 												<label for="inputChoosePassword" class="form-label">Password</label>
