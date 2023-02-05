@@ -15,6 +15,12 @@ class department extends Model
         $data = DB::select('Select * from `departments`');
         return json_encode(array('success'=>'true','data'=>$data,'error_code'=>'10001'));
     }
+    public static function getDepartmentDropdown()
+    {
+        $data = DB::select('Select * from `departments` where status="1"');
+        return $data;
+    }
+
     
     public static function saveRecord($data)
     {

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DesignationController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -65,3 +66,6 @@ Route::any('/designation/create',[DesignationController::class,'Create']);
 Route::any('/designation/delete',[DesignationController::class,'Delete']);
 Route::get('/ticket',function(){return view('/ticket/allticket');});
 Route::any('/ticket/create',[TicketController::class,'create']);
+Route::get('/employee',[EmployeeController::class,'Index']);
+Route::any('/employee/create',[EmployeeController::class,'Create']);
+Route::any('/employee/delete',[EmployeeController::class,'Delete']);

@@ -15,6 +15,12 @@ class designation extends Model
         $data = DB::select('Select * from `designations`');
         return json_encode(array('success'=>'true','data'=>$data,'error_code'=>'10001'));
     }
+
+    public static function getDesignationDropdown()
+    {
+        $data = DB::select('Select * from `designations` where status="1"');
+        return $data;
+    }
     
     public static function saveRecord($data)
     {
