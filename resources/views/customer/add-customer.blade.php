@@ -146,10 +146,10 @@ return false; }
                   <label for="InputLanguage" class="form-label">Status</label>
                   <select class="form-select" id="InputLanguage" aria-label="Default select example" name="status">
                     <option selected>--Select Status--</option>
-                    <option value="Active">Active</option>
-                    <option value="Inactive">Inactive</option>
-                    <option value="Hold">Hold</option>
-                    <option value="Padding">Padding</option>
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                    <option value="2">Hold</option>
+                    <option value="3">Padding</option>
                   </select>
                 </div>
                 <div class="col-12 col-lg-6">

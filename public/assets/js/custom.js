@@ -81,3 +81,24 @@ function deleteEmployee(id)
           }
     }
 }
+function deleteTicket(id)
+{
+    if(id!='')
+    {
+        if(!confirm("Do you want to delete this employee ?")) {
+            return false;
+          }
+          else
+          {
+            $.ajax({
+                url:'ticket/delete?id='+id,
+                type:'get',
+                success:function(suc)
+                {
+                    alert(suc);
+                    location.href='ticket';
+                }
+            })
+          }
+    }
+}

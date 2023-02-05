@@ -127,8 +127,8 @@ if ($permissionarr['success'] == 'false') { ?>
                                 <td>{{$ticket['description']}}</td>
                                 <td>{{$ticket['deadline_date']}}</td>
                                 <td><div class="d-flex order-actions justify-content-center">
-												<a href="javascript:;" class=""><i class="bx bxs-edit"></i></a>
-												<a href="javascript:;" class="ms-3"><i class="bx bxs-trash"></i></a>
+												<a href="ticket/create?id={{$ticket['id']}}" class=""><i class="bx bxs-edit"></i></a>
+												<a href="javascript:void(0);" onclick="deleteTicket({{$ticket['id']}})" class="ms-3"><i class="bx bxs-trash"></i></a>
 											</div></td>
                             </tr>
                         <?php

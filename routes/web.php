@@ -69,3 +69,4 @@ Route::any('/ticket/create',[TicketController::class,'create']);
 Route::get('/employee',[EmployeeController::class,'Index']);
 Route::any('/employee/create',[EmployeeController::class,'Create']);
 Route::any('/employee/delete',[EmployeeController::class,'Delete']);
+Route::any('/ticket/delete',[TicketController::class,'Delete']);

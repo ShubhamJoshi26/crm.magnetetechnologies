@@ -10,6 +10,12 @@ class TicketController extends Controller
     {
         if($request->isMethod('get'))
         {
+            if($request->id!='')
+            {
+                $ticketdata = ticket::getTicketById($request->id);
+                $data = $ticketdata;
+                return view('ticket/addticket',['ticketdata'=>$data]);
+            }
             return view('ticket/addticket');
         }
         if($request->isMethod('post'))
@@ -32,10 +38,17 @@ class TicketController extends Controller
             $data['attachment'] = $request->attachment;
             $data['created_at'] = date('Y-m-d H:i:s');
             $data['updated_at'] = date('Y-m-d H:i:s');
+            if (!empty($_FILES) && $_FILES['attachment']['name'] != '') 
+            {
+                $imageName = time() . $_FILES['attachment']['name'].'.' . $request->profile_photo->extension();
+                $request->profile_photo->move(public_path('uploads/ticket/attachment'), $imageName);
+                $data['attachment'] = $imageName;
+
+            }
             if($request->id !='')
             {
                 $data['id'] = $request->id;
-                $result = ticket::UpdateTicket($data);
+                $result = ticket::CreateTicket($data);
             }
             else
             {
@@ -49,6 +62,15 @@ class TicketController extends Controller
             {
                 return redirect('ticket')->with('error','Ticket Not Created');
             }
+        }
+    }
+    public static function Delete(Request $request)
+    {
+        $result = ticket::deleteTicket($request->id);
+        if ($result) {
+            echo ("Employee deleted successfully.");
+        } else {
+            echo 'Something went wrong';
         }
     }
 }

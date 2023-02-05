@@ -16,7 +16,12 @@ class ticket extends Model
     }
     public static function CreateTicket($data)
     {
-        $ticket = new ticket;
+        
+        if (array_key_exists('id', $data) && $data['id'] != '') {
+            $ticket = ticket::find($data['id']);
+        } else {
+            $ticket = new ticket;
+        }
         $ticket->taskname =    $data['taskname'];
         $ticket->description =    $data['description'];
         $ticket->ststus =    $data['ststus'];
@@ -41,5 +46,19 @@ class ticket extends Model
         }else{
             return false;
         }
+    }
+    public static function getTicketById($id)
+    {
+        $data = DB::select('select * from `tickets` where id = '.$id.'');
+        return (array)$data[0];
+    }
+    public static function UpdateTicket($data)
+    {
+        $designation = designation::find($data['id']);
+    }
+    public static function deleteTicket($id)
+    {
+        DB::delete('DELETE FROM tickets WHERE id = ?', [$id]);
+        return true;
     }
 }
