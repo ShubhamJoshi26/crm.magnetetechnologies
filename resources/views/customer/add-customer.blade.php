@@ -20,7 +20,9 @@ if($permissionarr['success']=='false')
                 
 			</div>
 		</div>
-<?php  return false; }
+<?php
+include('layout.footer');
+return false; }
 
 ?>
 <!--start page wrapper -->
@@ -161,6 +163,7 @@ if($permissionarr['success']=='false')
               </div>
               <!---end row-->
             </div>
+          </form>
         </div>
       </div>
     </div>

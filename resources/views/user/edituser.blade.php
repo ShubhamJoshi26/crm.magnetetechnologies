@@ -1,8 +1,12 @@
 @include('layout.header')
 <?php
-
+use App\Models\designation;
 use App\Http\Controllers\UserController;
 $id = Session()->get('id');
+$alldesignation = designation::getRecords();
+$alldesignationarr = json_decode($alldesignation,true);
+$designationoptions = '<option value="0">--Select Designation--</option>';
+
 $permission = UserController::getUserPermissionByName('user',$id);
 $permissionarr = json_decode($permission, true);
 print_r($permissionarr);
@@ -107,7 +111,24 @@ if($users!='')
                 </div>
                 <div class="col-12 col-lg-6">
                   <label for="InputCountry" class="form-label">Designation</label>
-                  <input type="text" class="form-control" placeholder="Enter Designation" id="InputDesignation" aria-label="Default select example" name="designation" value="<?php if($userDetails['designation']!=''){echo $userDetails['designation'];}?>">
+                  <select name="designation" id="designation" class="form-select">
+                      <?php
+                      if($alldesignationarr['success']=='true')
+                      {
+                        foreach($alldesignationarr['data'] as  $designation)
+                        {
+                          $selectcheck = '';
+                          if($designation['id']==$userDetails['designation'])
+                          {
+                            $selectcheck = 'selected="selected"';
+                          }
+                          $designationoptions .= '<option '.$selectcheck.' value="'.$designation['id'].'">'.$designation['name'].'</option>';
+                        }
+                      }
+                      echo $designationoptions;
+                      ?>
+                  </select>
+                 
                 </div>
                 <div class="col-12 col-lg-6">
                   <label for="InputLanguage" class="form-label">User Type</label>
