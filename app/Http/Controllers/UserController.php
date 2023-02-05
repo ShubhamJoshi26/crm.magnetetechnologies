@@ -16,7 +16,7 @@ class UserController extends Controller
         Log::info('Login',array('data'=>$data));
         if($data->email!='' && $data->password!='')
         {
-            $UserData = DB::table('users')->where('email','=',$data->email, 'or' , 'username' ,'=',$data->email)->orWhere('username','=',$data->email)->where('password','=',md5($data->password))->get();
+            $UserData = DB::table('users')->where('email','=',$data->email)->orWhere('username','=',$data->email)->where('password','=',md5($data->password))->get();
             $user = array();
             foreach($UserData as $items)
             {
