@@ -281,11 +281,11 @@ $users = json_decode($UserData, true);
 							<div class="menu-title">Tickets</div>
 						</a>
 						<ul>
-							<li> <a href="/ticket"><i class="fa fa-angle-right"></i>All Tickets</a></li>
-							<li> <a href="/ticket/new"><i class="fa fa-angle-right"></i>New Tickets</a></li>
-							<li> <a href="/ticket/inprocess"><i class="fa fa-angle-right"></i>Inprocess Tickets</a></li>
-							<li> <a href="/ticket/closed"><i class="fa fa-angle-right"></i>Closed Tickets</a></li>
-							<li> <a href="/ticket/reopen"><i class="fa fa-angle-right"></i>Reopen Tickets</a></li>
+							<li> <a href="/ticket" ><i class="fa fa-angle-right"></i>All Tickets</a></li>
+							<li> <a href="javascript:void(0)" onclick="getAllNewTickets(1);"><i class="fa fa-angle-right"></i>New Tickets</a></li>
+							<li> <a href="javascript:void(0)" onclick="getAllNewTickets(2);"><i class="fa fa-angle-right"></i>Inprocess Tickets</a></li>
+							<li> <a href="javascript:void(0)" onclick="getAllNewTickets(4);"><i class="fa fa-angle-right"></i>Closed Tickets</a></li>
+							<li> <a href="javascript:void(0)" onclick="getAllNewTickets(5);"><i class="fa fa-angle-right"></i>Reopen Tickets</a></li>
 						</ul>
 					</li>
 				<?php }

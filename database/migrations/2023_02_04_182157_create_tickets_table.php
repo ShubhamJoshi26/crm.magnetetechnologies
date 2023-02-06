@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('taskname')->nullable();
             $table->string('description')->nullable();
-            $table->enum('ststus',[1,2,3,4,5])->nullable();
+            $table->enum('status',[1,2,3,4,5])->nullable();
             $table->enum('priority',[1,2,3])->nullable();
             $table->string('assigned_to')->nullable();
             $table->timestamps('from_date');
