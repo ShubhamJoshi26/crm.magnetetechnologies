@@ -74,4 +74,4 @@ Route::any('/employee/delete',[EmployeeController::class,'Delete']);
 Route::get('/module',[ModuleController::class,'Modules']);
 Route::any('/module/create',[ModuleController::class,'Create']);
 Route::any('/module/delete',[ModuleController::class,'Delete']);
-
+Route::any('/ticket/status',function(){return view('/ticket/ticket_ajax');});

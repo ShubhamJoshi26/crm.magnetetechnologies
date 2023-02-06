@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ticket;
+use Illuminate\Support\Facades\DB;
 class TicketController extends Controller
 {
     public static function create(Request $request)
@@ -22,7 +23,7 @@ class TicketController extends Controller
         {
             $data['taskname'] = $request->taskname;
             $data['description'] = $request->description;
-            $data['ststus'] = $request->ststus;
+            $data['status'] = $request->status;
             $data['priority'] = $request->priority;
             $data['assigned_to'] = $request->assigned_to;
             $data['from_date'] = $request->from_date;
@@ -72,5 +73,10 @@ class TicketController extends Controller
         } else {
             echo 'Something went wrong';
         }
+    }
+    public static function getTicketByStatus($status)
+    {
+        $ticketdata = DB::table('tickets')->where('status','=',$status)->get();
+        return json_encode(array('success'=>'true','data'=>$ticketdata,'error_code'=>'10001'));
     }
 }

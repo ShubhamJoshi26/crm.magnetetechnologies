@@ -24,7 +24,7 @@ class ticket extends Model
         }
         $ticket->taskname =    $data['taskname'];
         $ticket->description =    $data['description'];
-        $ticket->ststus =    $data['ststus'];
+        $ticket->status =    $data['status'];
         $ticket->priority =    $data['priority'];
         $ticket->assigned_to =    $data['assigned_to'];
         $ticket->from_date =    $data['from_date'];

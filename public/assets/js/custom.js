@@ -123,3 +123,14 @@ function deleteModule(id)
           }
     }
 }
+function getAllNewTickets(type)
+{
+    $.ajax({
+        url: 'ticket/status?action=getTicket&sts='+type,
+        type:'get',
+        success:function(res)
+        {
+            $('#tickettable').html(res);
+        }
+    })
+}

@@ -3,11 +3,43 @@
 
 use App\Models\ticket;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\TicketController;
 
 $id = Session()->get('id');
 $alltickets = ticket::getAllTickets();
 $ticketarr = json_decode($alltickets, true);
-
+$inprocessticketcount = 0;
+$newticketcount = 0;
+$holdticketcount = 0;
+$reopenticketcount = 0;
+$closeticketcount = 0;
+if($ticketarr['success']=='true')
+{
+    foreach($ticketarr['data'] as $ticketcounts)
+    {
+        if($ticketcounts['status']==1)
+        {
+            $newticketcount = +1;
+        }
+        else if($ticketcounts['status']==2)
+        {
+            $inprocessticketcount = +1;
+        }
+        else if($ticketcounts['status']==3)
+        {
+            $holdticketcount = +1;
+        }
+        else if($ticketcounts['status']==4)
+        {
+            $reopenticketcount = +1;
+        }
+        else if($ticketcounts['status']==5)
+        {
+            $closeticketcount = +1;
+        }
+    }
+}
 $permission = UserController::getUserPermissionByName('tickets', $id);
 $permissionarr = json_decode($permission, true);
 if ($permissionarr['success'] == 'false') { ?>
@@ -35,11 +67,11 @@ if ($permissionarr['success'] == 'false') { ?>
             <div class="col">
                 <div class="card radius-10 border-start border-0 border-3 border-info">
                     <div class="card-body">
-                        <a href="/ticket/new/">
+                        <a href="javascript:void(0)" onclick="getAllNewTickets(1);">
                             <div class="d-flex align-items-center">
                                 <div>
                                     <p class="mb-0 text-secondary">New Tickets</p>
-                                    <h4 class="my-1 text-info">4805</h4>
+                                    <h4 class="my-1 text-info"><?php echo $newticketcount;?></h4>
                                     <p class="mb-0 font-13">+2.5% from last week</p>
                                 </div>
                                 <div class="widgets-icons-2 rounded-circle bg-gradient-scooter text-white ms-auto"><i class='fa fa-ticket'></i>
@@ -52,45 +84,51 @@ if ($permissionarr['success'] == 'false') { ?>
             <div class="col">
                 <div class="card radius-10 border-start border-0 border-3 border-danger">
                     <div class="card-body">
+                        <a href="javascript:void(0)" onclick="getAllNewTickets(2);">
                         <div class="d-flex align-items-center">
                             <div>
                                 <p class="mb-0 text-secondary">In-Process</p>
-                                <h4 class="my-1 text-danger">$84,245</h4>
+                                <h4 class="my-1 text-danger"><?php echo $inprocessticketcount;?></h4>
                                 <p class="mb-0 font-13">+5.4% from last week</p>
                             </div>
                             <div class="widgets-icons-2 rounded-circle bg-gradient-bloody text-white ms-auto"><i class='fa fa-file-text-o'></i>
                             </div>
                         </div>
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="col">
                 <div class="card radius-10 border-start border-0 border-3 border-success">
                     <div class="card-body">
+                        <a href="javascript:void(0)" onclick="getAllNewTickets(4);">
                         <div class="d-flex align-items-center">
                             <div>
                                 <p class="mb-0 text-secondary">Reopen</p>
-                                <h4 class="my-1 text-success">34.6%</h4>
+                                <h4 class="my-1 text-success"><?php echo $reopenticketcount;?></h4>
                                 <p class="mb-0 font-13">-4.5% from last week</p>
                             </div>
                             <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i class='fa fa-exclamation-triangle'></i>
                             </div>
                         </div>
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="col">
                 <div class="card radius-10 border-start border-0 border-3 border-warning">
                     <div class="card-body">
+                        <a href="javascript:void(0)" onclick="getAllNewTickets(5);">
                         <div class="d-flex align-items-center">
                             <div>
                                 <p class="mb-0 text-secondary">Closed</p>
-                                <h4 class="my-1 text-warning">8.4K</h4>
+                                <h4 class="my-1 text-warning"><?php echo $closeticketcount;?></h4>
                                 <p class="mb-0 font-13">+8.4% from last week</p>
                             </div>
                             <div class="widgets-icons-2 rounded-circle bg-gradient-blooker text-white ms-auto"><i class='fa fa-ticket'></i>
                             </div>
                         </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -115,21 +153,42 @@ if ($permissionarr['success'] == 'false') { ?>
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tickettable">
                     <?php
                     if (isset($ticketarr['data']) && !empty($ticketarr['data'])) {
                         foreach ($ticketarr['data'] as $ticket) {
+                            $assignedtoname = '';
+                            $assignedbyname = '';
+                            $assignedtoid = EmployeeController::getEmployeeById($ticket['assigned_to']);
+                            $assignedto = json_decode($assignedtoid, true);
+                            
+                            if ($assignedto['success'] == 'true') {
+                                $assignedtoname = $assignedto['data'][0]['name'];
+                            }
+                            $assignedbydata = UserController::getUserById($ticket['assigned_by']);
+                            $assignedby = json_decode($assignedbydata, true);
+                            if ($assignedby['success'] == 'true') {
+                                $assignedbyname = $assignedby['data'][0]['name'];
+                            }
                     ?>
                             <tr>
                                 <td>{{$ticket['id']}}</td>
-                                <td><?php if($ticket['priority']==1){ echo "<span class='badge bg-success'>Low</span>";}elseif($ticket['priority']==2){echo "<span class='badge bg-warning text-dark'>Medium</span>";}elseif($ticket['priority']==3){echo "<span class='badge bg-danger'>Heigh</span>";}?></td>
+                                <td><?php if ($ticket['priority'] == 1) {
+                                        echo "<span class='badge bg-success'>Low</span>";
+                                    } elseif ($ticket['priority'] == 2) {
+                                        echo "<span class='badge bg-warning text-dark'>Medium</span>";
+                                    } elseif ($ticket['priority'] == 3) {
+                                        echo "<span class='badge bg-danger'>Heigh</span>";
+                                    } ?></td>
                                 <td>{{$ticket['taskname']}}</td>
-                                <td>{{$ticket['description']}}</td>
+                                <td>{{$ticket['description']}} <br><span style="float:left;" class='badge bg-info'><?php echo 'Assigned To: ' . $assignedtoname; ?></span><span style="float:right;" class='badge bg-primary'><?php echo 'Assigned By: ' . $assignedbyname; ?></span></td>
                                 <td>{{$ticket['deadline_date']}}</td>
-                                <td><div class="d-flex order-actions justify-content-center">
-												<a href="ticket/create?id={{$ticket['id']}}" class=""><i class="bx bxs-edit"></i></a>
-												<a href="javascript:void(0);" onclick="deleteTicket({{$ticket['id']}})" class="ms-3"><i class="bx bxs-trash"></i></a>
-											</div></td>
+                                <td>
+                                    <div class="d-flex order-actions justify-content-center">
+                                        <a href="ticket/create?id={{$ticket['id']}}" class=""><i class="bx bxs-edit"></i></a>
+                                        <a href="javascript:void(0);" onclick="deleteTicket({{$ticket['id']}})" class="ms-3"><i class="bx bxs-trash"></i></a>
+                                    </div>
+                                </td>
                             </tr>
                         <?php
                         }

@@ -15,10 +15,10 @@ if($employees['success']=='true')
  
   $empopt = '<option value="0">--Select Assigned To--</option>';
   foreach($employees['data'] as $emp)
-  {
+  {  $selectedcheck = '';
     if(isset($ticketdata) && !empty($ticketdata))
     {
-      if($ticketdata['id']==$emp['employee_id'])
+      if($ticketdata['assigned_to']==$emp['employee_id'])
       {
         $selectedcheck = 'selected="selected"';
       }
@@ -30,7 +30,7 @@ $departArr = department::getRecords();
 $departments = json_decode($departArr,true);
 $depopt = '<option value="0">--Select Department--</option>';
 foreach($departments['data'] as $department)
-{
+{ $selectedcheck = '';
   if($department['status']==1)
   {
     if(isset($ticketdata) && !empty($ticketdata))
@@ -49,7 +49,7 @@ $clientopt = '<option value="0">--Select Client--</option>';
 if($customerarr['success']=='true')
 {
   foreach($customerarr['data'] as $customer)
-  {
+  { $selectedcheck = '';
     if($customer['status']==1)
     {
       if(isset($ticketdata) && !empty($ticketdata))
@@ -97,32 +97,32 @@ if ($permissionarr['success'] == 'false') { ?>
               <div class="row g-3">
                 <div class="col-12 col-lg-6">
                   @csrf
-                  <input type="hidden" name="id" id="id" value="<?php if($ticketdata['id']!=''){ echo $ticketdata['id'];}?>">
+                  <input type="hidden" name="id" id="id" value="<?php if(isset($ticketdata) && !empty($ticketdata) && $ticketdata['id']!=''){ echo $ticketdata['id'];}?>">
                   <label for="taskname" class="form-label">Task Name</label>
-                  <input type="text" class="form-control" id="taskname" placeholder="Task Name" name="taskname" value="<?php if($ticketdata['taskname']!=''){ echo $ticketdata['taskname'];}?>">
+                  <input type="text" class="form-control" id="taskname" placeholder="Task Name" name="taskname" value="<?php if(isset($ticketdata) && !empty($ticketdata) && $ticketdata['taskname']!=''){ echo $ticketdata['taskname'];}?>">
                 </div>
                 <div class="col-12 col-lg-6">
                   <label for="description" class="form-label">Description</label>
-                  <input type="text" class="form-control" id="description" placeholder="Description" name="description" value="<?php if($ticketdata['description']!=''){ echo $ticketdata['description'];}?>">
+                  <input type="text" class="form-control" id="description" placeholder="Description" name="description" value="<?php if(isset($ticketdata) && !empty($ticketdata) && $ticketdata['description']!=''){ echo $ticketdata['description'];}?>">
                 </div>
                 <div class="col-12 col-lg-6">
-                  <label for="ststus" class="form-label">Status</label>
-                  <select type="text" class="form-control" id="ststus"  name="ststus" >
+                  <label for="status" class="form-label">Status</label>
+                  <select type="text" class="form-control" id="status"  name="status" >
                     <option value="0">--Select Status--</option>
-                    <option value="1" <?php if($ticketdata['category']=="1"){ echo 'selected';}?>>New</option>
-                    <option value="2" <?php if($ticketdata['category']=="2"){ echo 'selected';}?>>In-Process</option>
-                    <option value="3" <?php if($ticketdata['category']=="3"){ echo 'selected';}?>>Hold</option>
-                    <option value="4" <?php if($ticketdata['category']=="4"){ echo 'selected';}?>>Reopen</option>
-                    <option value="5" <?php if($ticketdata['category']=="5"){ echo 'selected';}?>>Close</option>
+                    <option value="1" <?php if(isset($ticketdata) && !empty($ticketdata) && $ticketdata['status']=="1"){ echo 'selected';}?>>New</option>
+                    <option value="2" <?php if(isset($ticketdata) && !empty($ticketdata) && $ticketdata['status']=="2"){ echo 'selected';}?>>In-Process</option>
+                    <option value="3" <?php if(isset($ticketdata) && !empty($ticketdata) && $ticketdata['status']=="3"){ echo 'selected';}?>>Hold</option>
+                    <option value="4" <?php if(isset($ticketdata) && !empty($ticketdata) && $ticketdata['status']=="4"){ echo 'selected';}?>>Reopen</option>
+                    <option value="5" <?php if(isset($ticketdata) && !empty($ticketdata) && $ticketdata['status']=="5"){ echo 'selected';}?>>Close</option>
                   </select>
                 </div>
                 <div class="col-12 col-lg-6">
                   <label for="priority" class="form-label">Priority</label>
                   <select type="text" class="form-control" id="priority"  name="priority" >
                     <option value="0">--Select Status--</option>
-                    <option value="1" <?php if($ticketdata['category']=="1"){ echo 'selected';}?>>Low</option>
-                    <option value="2" <?php if($ticketdata['category']=="2"){ echo 'selected';}?>>Medium</option>
-                    <option value="3" <?php if($ticketdata['category']=="3"){ echo 'selected';}?>>Heigh</option>
+                    <option value="1" <?php if(isset($ticketdata) && !empty($ticketdata) && $ticketdata['category']=="1"){ echo 'selected';}?>>Low</option>
+                    <option value="2" <?php if(isset($ticketdata) && !empty($ticketdata) && $ticketdata['category']=="2"){ echo 'selected';}?>>Medium</option>
+                    <option value="3" <?php if(isset($ticketdata) && !empty($ticketdata) && $ticketdata['category']=="3"){ echo 'selected';}?>>Heigh</option>
                   </select>
                 </div>
                 <div class="col-12 col-lg-6">
@@ -133,25 +133,25 @@ if ($permissionarr['success'] == 'false') { ?>
                 </div>
                 <div class="col-12 col-lg-6">
                   <label for="from_date" class="form-label">From Date</label>
-                  <input type="date" class="form-control datepicker" id="from_date" placeholder="From Date" name="from_date" value="<?php if($ticketdata['from_date']!=''){ echo $ticketdata['from_date'];}?>">
+                  <input type="date" class="form-control datepicker" id="from_date" placeholder="From Date" name="from_date" value="<?php if(isset($ticketdata) && !empty($ticketdata) && $ticketdata['from_date']!=''){ echo $ticketdata['from_date'];}?>">
                 </div>
                 <div class="col-12 col-lg-6">
                   <label for="deadline_date" class="form-label">DeadLine Date</label>
-                  <input type="date" class="form-control" id="deadline_date" placeholder="DeadLine Date" name="deadline_date" value="<?php if($ticketdata['deadline_date']!=''){ echo $ticketdata['deadline_date'];}?>">
+                  <input type="date" class="form-control" id="deadline_date" placeholder="DeadLine Date" name="deadline_date" value="<?php if(isset($ticketdata) && !empty($ticketdata) && $ticketdata['deadline_date']!=''){ echo $ticketdata['deadline_date'];}?>">
                 </div>
                 <div class="col-12 col-lg-6">
                   <label for="assigned_date" class="form-label">Assigned Date</label>
-                  <input type="date" class="form-control" id="assigned_date" placeholder="Assigned Date" name="assigned_date" value="<?php if($ticketdata['assigned_date']!=''){ echo $ticketdata['assigned_date'];}?>">
+                  <input type="date" class="form-control" id="assigned_date" placeholder="Assigned Date" name="assigned_date" value="<?php if(isset($ticketdata) && !empty($ticketdata) && $ticketdata['assigned_date']!=''){ echo $ticketdata['assigned_date'];}?>">
                 </div>
                 <div class="col-12 col-lg-6">
                   <label for="category" class="form-label">Category</label>
                   <select class="form-select" id="category" aria-label="Default select example" name="category">
                     <option selected>--Select Category--</option>
-                    <option value="1" <?php if($ticketdata['category']=="1"){ echo 'selected';}?>>L1</option>
-                    <option value="2" <?php if($ticketdata['category']=="2"){ echo 'selected';}?>>Software Bug/Error</option>
-                    <option value="3" <?php if($ticketdata['category']=="3"){ echo 'selected';}?>>New Requirment</option>
-                    <option value="4" <?php if($ticketdata['category']=="4"){ echo 'selected';}?>>Online Training</option>
-                    <option value="5" <?php if($ticketdata['category']=="5"){ echo 'selected';}?>>Impliment</option>
+                    <option value="1" <?php if(isset($ticketdata) && !empty($ticketdata) && $ticketdata['category']=="1"){ echo 'selected';}?>>L1</option>
+                    <option value="2" <?php if(isset($ticketdata) && !empty($ticketdata) && $ticketdata['category']=="2"){ echo 'selected';}?>>Software Bug/Error</option>
+                    <option value="3" <?php if(isset($ticketdata) && !empty($ticketdata) && $ticketdata['category']=="3"){ echo 'selected';}?>>New Requirment</option>
+                    <option value="4" <?php if(isset($ticketdata) && !empty($ticketdata) && $ticketdata['category']=="4"){ echo 'selected';}?>>Online Training</option>
+                    <option value="5" <?php if(isset($ticketdata) && !empty($ticketdata) && $ticketdata['category']=="5"){ echo 'selected';}?>>Impliment</option>
                   </select>
                 </div>
                 <div class="col-12 col-lg-6">
@@ -168,15 +168,15 @@ if ($permissionarr['success'] == 'false') { ?>
                 </div>
                 <div class="col-12 col-lg-6">
                   <label for="contact_name" class="form-label">Contact Person</label>
-                  <input type="text" class="form-control" name="contact_name" id="contact_name" placeholder="Enter Contact Person Name" value="<?php if($ticketdata['contact_name']!=''){ echo $ticketdata['contact_name'];}?>">
+                  <input type="text" class="form-control" name="contact_name" id="contact_name" placeholder="Enter Contact Person Name" value="<?php if(isset($ticketdata) && !empty($ticketdata) && $ticketdata['contact_name']!=''){ echo $ticketdata['contact_name'];}?>">
                 </div>
                 <div class="col-12 col-lg-6">
                   <label for="contact_number" class="form-label">Contact Number</label>
-                  <input type="number" class="form-control" name="contact_number" maxlength="10" id="contact_number" placeholder="Enter Contact Number" value="<?php if($ticketdata['contact_number']!=''){ echo $ticketdata['contact_number'];}?>">
+                  <input type="number" class="form-control" name="contact_number" maxlength="10" id="contact_number" placeholder="Enter Contact Number" value="<?php if(isset($ticketdata) && !empty($ticketdata) && $ticketdata['contact_number']!=''){ echo $ticketdata['contact_number'];}?>">
                 </div>
                 <div class="col-12 col-lg-6">
                   <label for="contact_email" class="form-label">Contact Email Id</label>
-                  <input type="text" class="form-control" name="contact_email" id="contact_email" placeholder="Enter Contact Email Id" value="<?php if($ticketdata['contact_email']!=''){ echo $ticketdata['contact_email'];}?>">
+                  <input type="text" class="form-control" name="contact_email" id="contact_email" placeholder="Enter Contact Email Id" value="<?php if(isset($ticketdata) && !empty($ticketdata) && $ticketdata['contact_email']!=''){ echo $ticketdata['contact_email'];}?>">
                 </div>
                 <div class="col-12 col-lg-6">
                   <label for="attachment" class="form-label">attachment</label>
