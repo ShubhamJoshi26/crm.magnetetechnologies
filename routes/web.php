@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TicketController;
 
 /*
@@ -75,3 +76,5 @@ Route::get('/module',[ModuleController::class,'Modules']);
 Route::any('/module/create',[ModuleController::class,'Create']);
 Route::any('/module/delete',[ModuleController::class,'Delete']);
 Route::any('/ticket/status',function(){return view('/ticket/ticket_ajax');});
+Route::get('/setting/ticket',function(){return view('/setting/ticketsetting');});
+Route::post('/setting/createticketsetting',[SettingsController::class,'CreateTicketSettings']);

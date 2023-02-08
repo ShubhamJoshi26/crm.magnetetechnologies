@@ -18,25 +18,27 @@ if($ticketarr['success']=='true')
 {
     foreach($ticketarr['data'] as $ticketcounts)
     {
+        
         if($ticketcounts['status']==1)
         {
-            $newticketcount = +1;
+            $newticketcount++;
+            
         }
         else if($ticketcounts['status']==2)
         {
-            $inprocessticketcount = +1;
+            $inprocessticketcount++;
         }
         else if($ticketcounts['status']==3)
         {
-            $holdticketcount = +1;
+            $holdticketcount++;
         }
         else if($ticketcounts['status']==4)
         {
-            $reopenticketcount = +1;
+            $reopenticketcount++;
         }
         else if($ticketcounts['status']==5)
         {
-            $closeticketcount = +1;
+            $closeticketcount++;
         }
     }
 }
@@ -72,7 +74,7 @@ if ($permissionarr['success'] == 'false') { ?>
                                 <div>
                                     <p class="mb-0 text-secondary">New Tickets</p>
                                     <h4 class="my-1 text-info"><?php echo $newticketcount;?></h4>
-                                    <p class="mb-0 font-13">+2.5% from last week</p>
+                                    <!-- <p class="mb-0 font-13">+2.5% from last week</p> -->
                                 </div>
                                 <div class="widgets-icons-2 rounded-circle bg-gradient-scooter text-white ms-auto"><i class='fa fa-ticket'></i>
                                 </div>
@@ -89,7 +91,7 @@ if ($permissionarr['success'] == 'false') { ?>
                             <div>
                                 <p class="mb-0 text-secondary">In-Process</p>
                                 <h4 class="my-1 text-danger"><?php echo $inprocessticketcount;?></h4>
-                                <p class="mb-0 font-13">+5.4% from last week</p>
+                                <!-- <p class="mb-0 font-13">+5.4% from last week</p> -->
                             </div>
                             <div class="widgets-icons-2 rounded-circle bg-gradient-bloody text-white ms-auto"><i class='fa fa-file-text-o'></i>
                             </div>
@@ -106,7 +108,7 @@ if ($permissionarr['success'] == 'false') { ?>
                             <div>
                                 <p class="mb-0 text-secondary">Reopen</p>
                                 <h4 class="my-1 text-success"><?php echo $reopenticketcount;?></h4>
-                                <p class="mb-0 font-13">-4.5% from last week</p>
+                                <!-- <p class="mb-0 font-13">-4.5% from last week</p> -->
                             </div>
                             <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i class='fa fa-exclamation-triangle'></i>
                             </div>
@@ -123,7 +125,7 @@ if ($permissionarr['success'] == 'false') { ?>
                             <div>
                                 <p class="mb-0 text-secondary">Closed</p>
                                 <h4 class="my-1 text-warning"><?php echo $closeticketcount;?></h4>
-                                <p class="mb-0 font-13">+8.4% from last week</p>
+                                <!-- <p class="mb-0 font-13">+8.4% from last week</p> -->
                             </div>
                             <div class="widgets-icons-2 rounded-circle bg-gradient-blooker text-white ms-auto"><i class='fa fa-ticket'></i>
                             </div>
@@ -178,11 +180,11 @@ if ($permissionarr['success'] == 'false') { ?>
                                     } elseif ($ticket['priority'] == 2) {
                                         echo "<span class='badge bg-warning text-dark'>Medium</span>";
                                     } elseif ($ticket['priority'] == 3) {
-                                        echo "<span class='badge bg-danger'>Heigh</span>";
+                                        echo "<span class='badge bg-danger'>High</span>";
                                     } ?></td>
                                 <td>{{$ticket['taskname']}}</td>
                                 <td>{{$ticket['description']}} <br><span style="float:left;" class='badge bg-info'><?php echo 'Assigned To: ' . $assignedtoname; ?></span><span style="float:right;" class='badge bg-primary'><?php echo 'Assigned By: ' . $assignedbyname; ?></span></td>
-                                <td>{{$ticket['deadline_date']}}</td>
+                                <td>{{date('d-m-Y',$ticket['deadline_date'])}}</td>
                                 <td>
                                     <div class="d-flex order-actions justify-content-center">
                                         <a href="ticket/create?id={{$ticket['id']}}" class=""><i class="bx bxs-edit"></i></a>

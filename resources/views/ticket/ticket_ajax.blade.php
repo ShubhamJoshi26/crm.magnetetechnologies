@@ -31,7 +31,7 @@ if(!empty($_REQUEST) && $action=='getTicket')
         ?>
             <tr>
                                 <td>{{$ticket['id']}}</td>
-                                <td><?php if($ticket['priority']==1){ echo "<span class='badge bg-success'>Low</span>";}elseif($ticket['priority']==2){echo "<span class='badge bg-warning text-dark'>Medium</span>";}elseif($ticket['priority']==3){echo "<span class='badge bg-danger'>Heigh</span>";}?></td>
+                                <td><?php if($ticket['priority']==1){ echo "<span class='badge bg-success'>Low</span>";}elseif($ticket['priority']==2){echo "<span class='badge bg-warning text-dark'>Medium</span>";}elseif($ticket['priority']==3){echo "<span class='badge bg-danger'>High</span>";}?></td>
                                 <td>{{$ticket['taskname']}}</td>
                                 <td>{{$ticket['description']}} <br><span style="float:left;" class='badge bg-info'><?php echo 'Assigned To: '.$assignedtoname;?></span><span style="float:right;" class='badge bg-primary'><?php echo 'Assigned By: '.$assignedbyname;?></span> </td>
                                 <td>{{$ticket['deadline_date']}}</td>
@@ -40,6 +40,12 @@ if(!empty($_REQUEST) && $action=='getTicket')
 												<a href="javascript:void(0);" onclick="deleteTicket({{$ticket['id']}})" class="ms-3"><i class="bx bxs-trash"></i></a>
 											</div></td>
                             </tr>
+        <?php
+    }
+    if(empty($allnewtickets['data']))
+    {
+        ?>
+<tr><td colspan="6">Data Not Found</td></tr>
         <?php
     }
    }
