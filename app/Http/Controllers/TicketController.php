@@ -9,6 +9,7 @@ class TicketController extends Controller
 {
     public static function create(Request $request)
     {
+        $ticketlastnumber = SettingsController::getTicketLastNumber();
         if($request->isMethod('get'))
         {
             if($request->id!='')
@@ -26,9 +27,9 @@ class TicketController extends Controller
             $data['status'] = $request->status;
             $data['priority'] = $request->priority;
             $data['assigned_to'] = $request->assigned_to;
-            $data['from_date'] = $request->from_date;
-            $data['deadline_date'] = $request->deadline_date;
-            $data['assigned_date'] = $request->assigned_date;
+            $data['from_date'] = strtotime($request->from_date);
+            $data['deadline_date'] = strtotime($request->deadline_date);
+            $data['assigned_date'] = strtotime($request->assigned_date);
             $data['assigned_by'] = Session()->get('id');
             $data['category'] = $request->category;
             $data['department'] = $request->department;
@@ -41,10 +42,10 @@ class TicketController extends Controller
             $data['updated_at'] = date('Y-m-d H:i:s');
             if (!empty($_FILES) && $_FILES['attachment']['name'] != '') 
             {
-                $imageName = time() . $_FILES['attachment']['name'].'.' . $request->profile_photo->extension();
-                $request->profile_photo->move(public_path('uploads/ticket/attachment'), $imageName);
-                $data['attachment'] = $imageName;
-
+                $imageName = time().$_FILES['attachment']['name'].'.' . $request->attachment->extension();
+                $request->attachment->move(public_path('uploads/ticket/attachment'), $imageName);
+                $ticketattachmentpath = 'uploads/ticket/attachment/'.$imageName;
+                $data['attachment'] = $ticketattachmentpath;
             }
             if($request->id !='')
             {
@@ -78,5 +79,10 @@ class TicketController extends Controller
     {
         $ticketdata = DB::table('tickets')->where('status','=',$status)->get();
         return json_encode(array('success'=>'true','data'=>$ticketdata,'error_code'=>'10001'));
+    }
+    public static function getAttachmentsByTicketId($id)
+    {
+        $attachments = DB::table('ticketattachments')->where('ticket_id','=',$id)->get();
+        return json_encode(array('success'=>'true','data'=>$attachments,'error_code'=>'10001'));
     }
 }

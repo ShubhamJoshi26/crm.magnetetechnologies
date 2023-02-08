@@ -74,7 +74,7 @@ class EmployeeController extends Controller
     }
     public static function getEmployeeById($empid)
     {
-        $empdata = DB::table('employees')->where('id','=',$empid)->get();
+        $empdata = DB::table('employees')->where('employee_id','=',$empid)->get();
         return json_encode(array('success'=>'true','data'=>$empdata,'error_code'=>'10001'));
     }
 }

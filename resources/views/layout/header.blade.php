@@ -48,18 +48,7 @@ $users = json_decode($UserData, true);
 	<link rel="stylesheet" href="{{URL::asset('assets/css/dark-theme.css')}}" />
 	<link rel="stylesheet" href="{{URL::asset('assets/css/semi-dark.css')}}" />
 	<link rel="stylesheet" href="{{URL::asset('assets/css/header-colors.css')}}" />
-	<script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
-    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" type="text/css" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.full.min.js"></script>
-<script>
-	$(function () {
-  $("select").select2();
-});
-        $('.datepicker').datepicker({
-            uiLibrary: 'bootstrap'
-        });
-    </script>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<title>CRM - Magnete Technologies Pvt. Ltd.</title>
 </head>
 
@@ -320,7 +309,7 @@ $users = json_decode($UserData, true);
 							<div class="menu-title">Settings</div>
 						</a>
 						<ul>
-							<li> <a href="#"><i class="fa fa-angle-right"></i>Genaral Settings</a></li>
+							<li> <a href="/setting/ticket"><i class="fa fa-angle-right"></i>Ticket Settings</a></li>
 							<li> <a href="#"><i class="fa fa-angle-right"></i>Staff Settings</a></li>
 							<li> <a href="#"><i class="fa fa-angle-right"></i>Employees Settings</a></li>
 							<li> <a href="#"><i class="fa fa-angle-right"></i>Email Settings</a></li>

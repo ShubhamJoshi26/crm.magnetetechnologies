@@ -42,10 +42,15 @@ class ticket extends Model
         $ticket->updated_at =    $data['updated_at'];
         if($ticket->save())
         {
+            if(isset($data['attachment']) && $data['attachment']!='')
+            {
+                $addattachment = DB::insert('INSERT INTO `ticketattachments` (`attachment`,`ticket_id`) VALUES ("'.$data['attachment'].'","'.$ticket->id.'")');
+            }
             return true;
         }else{
             return false;
         }
+        
     }
     public static function getTicketById($id)
     {
