@@ -66,4 +66,21 @@ class ticket extends Model
         DB::delete('DELETE FROM tickets WHERE id = ?', [$id]);
         return true;
     }
+    public static function getTicketsByUserId($id)
+    {
+        $user_id = DB::table('users')->where('id','=',$id)->get('username');
+        if($user_id[0]->username!='')
+        {
+            $userticket  = DB::table('tickets')->where('assigned_to','=',$user_id[0]->username)->get();
+            if(!empty((array)$userticket))
+            {
+                return json_encode(array('success'=>'true','data'=>$userticket,'error_code'=>'10001'));
+            }
+            else
+            {
+                return json_encode(array('success'=>'false','data'=>'','error_code'=>'10002'));
+            }
+           
+        }       
+    }
 }

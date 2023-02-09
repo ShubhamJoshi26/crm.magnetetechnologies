@@ -134,3 +134,15 @@ function getAllNewTickets(type)
         }
     })
 }
+function getAllNewTicketsByUser(type)
+{
+    $.ajax({
+        url: '/ticket/status?action=getTicketByUser&sts='+type,
+        type:'get',
+        success:function(res)
+        {
+            console.log(res);
+            $('#tickettable').html(res);
+        }
+    })
+}

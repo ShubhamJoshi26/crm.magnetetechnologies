@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\WebsiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,3 +79,6 @@ Route::any('/module/delete',[ModuleController::class,'Delete']);
 Route::any('/ticket/status',function(){return view('/ticket/ticket_ajax');});
 Route::get('/setting/ticket',function(){return view('/setting/ticketsetting');});
 Route::post('/setting/createticketsetting',[SettingsController::class,'CreateTicketSettings']);
+Route::any('/user/task',function(){return view('user/alltask');});
+Route::any('/website/testimonial/add',function(){return view('/website/testimonials/addtestimonials');});
+Route::any('/website/testimonials/add',[WebsiteController::class,'CreateTestimonials']);

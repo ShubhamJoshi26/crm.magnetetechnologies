@@ -146,7 +146,7 @@ $users = json_decode($UserData, true);
 							<div class="menu-title">Tasks</div>
 						</a>
 						<ul>
-							<li> <a href="#"><i class="fa fa-angle-right"></i>Running Task</a></li>
+							<li> <a href="/user/task"><i class="fa fa-angle-right"></i>My Task</a></li>
 							<li> <a href="#"><i class="fa fa-angle-right"></i>Archive Task</a></li>
 						</ul>
 					</li>
@@ -451,7 +451,7 @@ $users = json_decode($UserData, true);
 							</li>
 							<li> <a class="has-arrow" href="#">Manege Testimonials</a>
 								<ul>
-									<li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Add Testimonials</a></li>
+									<li> <a href="/website/testimonial/add"><i class="bx bx-right-arrow-alt"></i>Add Testimonials</a></li>
 									<li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Edit Testimonials</a></li>
 									<li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Delete Testimonials</a></li>
 									<li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Trash Testimonials</a></li>
