@@ -72,7 +72,8 @@ class ticket extends Model
         if($user_id[0]->username!='')
         {
             $userticket  = DB::table('tickets')->where('assigned_to','=',$user_id[0]->username)->get();
-            if(!empty((array)$userticket))
+            
+            if(!empty($userticket->toArray()))
             {
                 return json_encode(array('success'=>'true','data'=>$userticket,'error_code'=>'10001'));
             }
