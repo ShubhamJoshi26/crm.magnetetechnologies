@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('testimonials', function (Blueprint $table) {
-            $table->charset = 'utf8mb4';
-            $table->collation = 'utf8mb4_unicode_ci';
+        Schema::create('ticketcomments', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('date');
-            $table->string('testifile')->nullable();
-            $table->string('description')->nullable();
-            $table->enum('status',[0,1]);
+            $table->string('ticket_id');
+            $table->enum('ststus',[1,2,3,4,5])->nullable();
+            $table->string('commented_by')->nullable();
+            $table->string('comment')->nullable();
+            $table->string('assigned_to')->nullable();
             $table->timestamps();
         });
     }

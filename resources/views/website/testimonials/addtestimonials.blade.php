@@ -1,4 +1,17 @@
 @include('layout.header')
+<?php
+
+use App\Models\testimonial;
+
+$testimonial = testimonial::getTestimonialById($_GET['id']);
+$testimonialarr = json_decode($testimonial,true);
+if($testimonialarr['success']=='true')
+{
+  $test = $testimonialarr['data'];
+  
+
+}
+?>
 <div class="page-wrapper">
     <div class="page-content">
     @include('layout.alert')
@@ -23,24 +36,36 @@
             <form action="/website/testimonials/add" id="addtestimonials" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
-                <input type='hidden' name='id' value=''/>
+                <input type='hidden' name='id' value='<?php if(isset($test) && $test['id']!=''){echo $test['id'];}?>'/>
                 <div class="col-12 col-lg-6">
                   <label for="" class="form-label">Testimonial Title</label>
                   <input type="text" required class="form-control" id="title" 
-                  value="" placeholder="Testimonial Title" name="title">
+                  value="<?php if(isset($test) && $test['title']!=''){echo $test['title'];}?>" placeholder="Testimonial Title" name="title">
                 </div>
                 <div class="col-12 col-lg-6">
                   <label for="" class="form-label">Date</label>
                   <input type="text" required class="form-control datepicker" id="date" 
-                  value="" placeholder="Testimonial Title" name="date">
+                  value="<?php if(isset($test) && $test['date']!=''){echo date('d-m-Y',$test['date']);}?>" placeholder="Testimonial Title" name="date">
                 </div>
                 <div class="col-12 col-lg-6">
                   <label for="" class="form-label">Image</label>
                   <input class="form-control" type="file" id="testifile" name="testifile">
                 </div>
+                <?php 
+                if(isset($test) && $test['testifile']!='')
+                {
+                  ?>
+
+                  <div class="col-12 col-lg-6">
+                  <a href="<?php echo URL::asset($test['testifile']); ?>">  <label for="" class="form-label mt-4"><?php if(isset($test) && $test['testifile']!=''){ $filename = explode('/',$test['testifile']); echo end($filename);}?></label></a>
+                    <!-- <input class="form-control" type="file" id="testifile" name="testifile"> -->
+                  </div>
+                  <?php
+                }
+                ?>
                 <div class="col-12 col-lg-12">
                   <label for="" class="form-label">Description</label>
-                  <textarea class="texteditor" name="description" id="description"></textarea>
+                  <textarea class="texteditor" name="description" id="description"><?php if(isset($test) && $test['description']!=''){echo $test['description'];}?></textarea>
                 </div>
                 </div>
                 <div class="row">

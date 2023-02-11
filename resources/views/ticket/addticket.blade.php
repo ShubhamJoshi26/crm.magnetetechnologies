@@ -6,11 +6,13 @@ use App\Http\Controllers\UserController;
 use App\Models\employee;
 use App\Models\department;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\TicketController;
+use App\Models\ticket;
 
 $id = Session()->get('id');
 $selectedcheck = '';
-$allemployees = employee::getRecords();
+$allemployees = employee::getActiveRecords();
 $employees = json_decode($allemployees, true);
 if ($employees['success'] == 'true') {
 
@@ -62,6 +64,26 @@ if (isset($ticketdata) && !empty($ticketdata)) {
     $attachmentsarr = $allattachments['data'];
   }
 }
+if (isset($ticketdata) && !empty($ticketdata)) {
+$allcomments = ticket::getCommentByTickeyId($ticketdata['id']);
+$commentarr = json_decode($allcomments,true);
+if($commentarr['success']=='true')
+{
+  $comments = $commentarr['data'];
+}
+}
+function getStatus($status)
+{
+  $statusname = match($status)
+  {
+    '1'=>'New',
+    '2'=>'In-Process',
+    '3'=>'Hold',
+    '4'=>'Reopen',
+    '5'=>'Close',
+  };
+  return $statusname;
+}
 $permission = UserController::getUserPermissionByName('tickets', $id);
 $permissionarr = json_decode($permission, true);
 if ($permissionarr['success'] == 'false') { ?>
@@ -91,7 +113,7 @@ if ($permissionarr['success'] == 'false') { ?>
         <div class="bs-stepper-content">
           <form id="ticketform" action="create" method="post" enctype="multipart/form-data">
             <div id="test-l-1" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger1">
-              <h5 class="mb-1">Create Ticket</h5>
+              <h5 class="mb-1">Create Ticket- <?php if(isset($ticketdata) && !empty($ticketdata)){ echo $ticketdata['id'];}?></h5>
               <!-- <p class="mb-4">Enter personal information to get closer to our organization</p> -->
               <div class="row g-3">
                 <div class="col-12 col-lg-6">
@@ -239,7 +261,62 @@ if ($permissionarr['success'] == 'false') { ?>
                     ?>
                   </ul>
                 </div>
+                <div class="col-12 col-lg-6">
+                  <label for="attachment" class="form-label">Comment</label>
+                  <textarea class="form-control" type="text" id="comment" name="comment"></textarea>
+                </div>
               </div>
+              <div class="table-responsive">
+            <table class="table table-striped table-bordered dataTable mt-3 text-center">
+                <thead class="table-light">
+                    <tr>
+                        <th>Comment</th>
+                        <th>Commented By</th>
+                        <th>Assigned To</th>
+                        <th>Date/Time</th>
+                        <th>Status</th>
+                       
+                        
+                    </tr>
+                </thead>
+                <tbody id="tickettable">
+                    <?php
+                    if (isset($comments) && !empty($comments)) {
+                        foreach ($comments as $key=> $carr) {
+                            $assignedbyname = '';
+                            $assignedtoname = '';
+                            $assignedtoid = EmployeeController::getEmployeeById($carr['assigned_to']);
+                            $assignedto = json_decode($assignedtoid, true);
+                            if ($assignedto['success'] == 'true' && !empty($assignedto['data'])) {
+                                $assignedtoname = $assignedto['data'][0]['name'];
+                            }
+                            $assignedbydata = UserController::getUserById($carr['commented_by']);
+                            $assignedby = json_decode($assignedbydata, true);
+                            if ($assignedby['success'] == 'true') {
+                                $assignedbyname = $assignedby['data'][0]['name'];
+                            }
+                            
+                    ?>
+                            <tr>
+                                <td><?php echo $carr['comment'];?></td>
+                                <td><?php echo $assignedbyname;?></td>
+                                <td><?php echo $assignedtoname;?></td>
+                                <td><?php echo $carr['created_at'];?></td>
+                                <td><?php if($key>0 && $comments[$key-1]['status']!=$carr['status'] ){ echo getStatus($comments[$key-1]['status']).' to ';};  echo getStatus($carr['status']);?></td>
+                            </tr>
+                        <?php
+                        }
+                    } else {
+                        ?>
+                        <tr>
+                            <td colspan="6">No Data Found</td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
               <div class="row mt-5">
                 <div class="col-5">
 

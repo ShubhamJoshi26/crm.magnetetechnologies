@@ -451,8 +451,8 @@ $users = json_decode($UserData, true);
 							</li>
 							<li> <a class="has-arrow" href="#">Manege Testimonials</a>
 								<ul>
+									<li> <a href="/website/testimonial/list"><i class="bx bx-right-arrow-alt"></i>Testimonials List</a></li>
 									<li> <a href="/website/testimonial/add"><i class="bx bx-right-arrow-alt"></i>Add Testimonials</a></li>
-									<li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Edit Testimonials</a></li>
 									<li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Delete Testimonials</a></li>
 									<li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Trash Testimonials</a></li>
 								</ul>

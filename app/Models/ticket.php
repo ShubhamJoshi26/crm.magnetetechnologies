@@ -19,8 +19,11 @@ class ticket extends Model
         
         if (array_key_exists('id', $data) && $data['id'] != '') {
             $ticket = ticket::find($data['id']);
+            $ticket->updated_at =    $data['updated_at'];
         } else {
             $ticket = new ticket;
+            $ticket->created_at =    $data['created_at'];
+            $ticket->updated_at =    $data['updated_at'];
         }
         $ticket->taskname =    $data['taskname'];
         $ticket->description =    $data['description'];
@@ -38,14 +41,15 @@ class ticket extends Model
         $ticket->contact_number =    $data['contact_number'];
         $ticket->contact_email =    $data['contact_email'];
         $ticket->attachment =    $data['attachment'];
-        $ticket->created_at =    $data['created_at'];
-        $ticket->updated_at =    $data['updated_at'];
         if($ticket->save())
         {
             if(isset($data['attachment']) && $data['attachment']!='')
             {
                 $addattachment = DB::insert('INSERT INTO `ticketattachments` (`attachment`,`ticket_id`) VALUES ("'.$data['attachment'].'","'.$ticket->id.'")');
             }
+            
+                $comment = DB::insert('INSERT INTO `ticketcomments` (`ticket_id`,`commented_by`,`assigned_to`,`status`,`comment`,`created_at`,`updated_at`) VALUES ("'.$ticket->id.'","'.$ticket->assigned_by.'","'.$data['assigned_to'].'","'.$data['status'].'","'.$data['comment'].'","'.$ticket->created_at.'","'.$ticket->updated_at.'")');
+            
             return true;
         }else{
             return false;
@@ -83,5 +87,17 @@ class ticket extends Model
             }
            
         }       
+    }
+    public static function getCommentByTickeyId($tid)
+    {
+        $comments = DB::table('ticketcomments')->where('ticket_id','=',$tid)->get();
+        if(!empty($comments->toArray()))
+        {
+            return json_encode(array('success'=>'true','data'=>$comments,'error_code'=>'1003'));
+        }
+        else
+        {
+            return json_encode(array('success'=>'false','data'=>'','error_code'=>'10004'));
+        }
     }
 }

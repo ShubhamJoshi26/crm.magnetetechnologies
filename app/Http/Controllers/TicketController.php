@@ -38,6 +38,7 @@ class TicketController extends Controller
             $data['contact_number'] = $request->contact_number;
             $data['contact_email'] = $request->contact_email;
             $data['attachment'] = $request->attachment;
+            $data['comment'] = $request->comment;
             $data['created_at'] = date('Y-m-d H:i:s');
             $data['updated_at'] = date('Y-m-d H:i:s');
             if (!empty($_FILES) && $_FILES['attachment']['name'] != '') 
