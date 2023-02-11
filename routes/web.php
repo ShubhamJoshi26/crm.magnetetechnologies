@@ -80,5 +80,6 @@ Route::any('/ticket/status',function(){return view('/ticket/ticket_ajax');});
 Route::get('/setting/ticket',function(){return view('/setting/ticketsetting');});
 Route::post('/setting/createticketsetting',[SettingsController::class,'CreateTicketSettings']);
 Route::any('/user/task',function(){return view('user/alltask');});
-Route::any('/website/testimonial/add',function(){return view('/website/testimonials/addtestimonials');});
-Route::any('/website/testimonials/add',[WebsiteController::class,'CreateTestimonials']);
+Route::get('/website/testimonial/add',function(){return view('/website/testimonials/addtestimonials');});
+Route::post('/website/testimonials/add',[WebsiteController::class,'CreateTestimonials']);
+Route::any('/website/testimonial/list',function(){return view('/website/testimonials/alltestimonials');});
