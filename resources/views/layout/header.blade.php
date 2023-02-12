@@ -599,7 +599,7 @@ $users = json_decode($UserData, true);
 				$permissionarr = json_decode($permission, true);
 				if ($permissionarr['success'] == 'true') { ?>
 					<li>
-						<a href="email.php">
+						<a href="/email">
 							<div class="parent-icon"><i class="fa fa-envelope-o"></i>
 							</div>
 							<div class="menu-title">Mails</div>

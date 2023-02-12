@@ -74,15 +74,19 @@ if($commentarr['success']=='true')
 }
 function getStatus($status)
 {
-  $statusname = match($status)
+  if(!is_null($status))
   {
-    '1'=>'New',
-    '2'=>'In-Process',
-    '3'=>'Hold',
-    '4'=>'Reopen',
-    '5'=>'Close',
-  };
-  return $statusname;
+    $statusname = match($status)
+    {
+      '1'=>'New',
+      '2'=>'In-Process',
+      '3'=>'Hold',
+      '4'=>'Reopen',
+      '5'=>'Close',
+    };
+    return $statusname;
+  }
+  
 }
 $permission = UserController::getUserPermissionByName('tickets', $id);
 $permissionarr = json_decode($permission, true);
@@ -295,14 +299,14 @@ if ($permissionarr['success'] == 'false') { ?>
                             if ($assignedby['success'] == 'true') {
                                 $assignedbyname = $assignedby['data'][0]['name'];
                             }
-                            
+                            // echo ($carr['status']);die('ddd');
                     ?>
                             <tr>
                                 <td><?php echo $carr['comment'];?></td>
                                 <td><?php echo $assignedbyname;?></td>
                                 <td><?php echo $assignedtoname;?></td>
                                 <td><?php echo $carr['created_at'];?></td>
-                                <td><?php if($key>0 && $comments[$key-1]['status']!=$carr['status'] ){ echo getStatus($comments[$key-1]['status']).' to ';};  echo getStatus($carr['status']);?></td>
+                                <td><?php if($carr['status']!='' && $carr!=NULL){if($key>0 && $comments[$key-1]['status']!=$carr['status'] ){ echo getStatus($comments[$key-1]['status']).' to ';};  echo getStatus($carr['status']);} ?></td>
                             </tr>
                         <?php
                         }

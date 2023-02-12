@@ -162,8 +162,7 @@ if ($permissionarr['success'] == 'false') { ?>
                             $assignedbyname = '';
                             $assignedtoid = EmployeeController::getEmployeeById($ticket['assigned_to']);
                             $assignedto = json_decode($assignedtoid, true);
-                            
-                            if ($assignedto['success'] == 'true') {
+                            if ($assignedto['success'] == 'true' && !empty($assignedto['data'])) {
                                 $assignedtoname = $assignedto['data'][0]['name'];
                             }
                             $assignedbydata = UserController::getUserById($ticket['assigned_by']);
