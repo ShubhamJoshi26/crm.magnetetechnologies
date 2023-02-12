@@ -21,7 +21,6 @@ if($ticketarr['success']=='true')
         if($ticketcounts['status']==1)
         {
             $newticketcount++;
-            
         }
         else if($ticketcounts['status']==2)
         {
