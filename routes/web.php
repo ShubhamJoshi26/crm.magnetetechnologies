@@ -83,3 +83,4 @@ Route::any('/user/task',function(){return view('user/alltask');});
 Route::get('/website/testimonial/add',function(){return view('/website/testimonials/addtestimonials');});
 Route::post('/website/testimonials/add',[WebsiteController::class,'CreateTestimonials']);
 Route::any('/website/testimonial/list',function(){return view('/website/testimonials/alltestimonials');});
+Route::get('/email',function(){return view('/mail/mail');});
