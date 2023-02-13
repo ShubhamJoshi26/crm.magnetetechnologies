@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -69,3 +71,9 @@ Route::any('/employee/delete',[EmployeeController::class,'Delete']);
 Route::get('/module',[ModuleController::class,'Modules']);
 Route::any('/module/create',[ModuleController::class,'Create']);
 Route::any('/module/delete',[ModuleController::class,'Delete']);
+Route::get('/productCategory',[ProductCategoryController::class,'Index']);
+Route::any('/productCategory/create',[ProductCategoryController::class,'Create']);
+Route::any('/productCategory/delete',[ProductCategoryController::class,'Delete']);
+Route::get('/productDetail',[ProductController::class,'Index']);
+Route::any('/productDetail/create',[ProductController::class,'Create']);
+Route::any('/productDetail/delete',[ProductController::class,'Delete']);

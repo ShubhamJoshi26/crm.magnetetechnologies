@@ -492,6 +492,24 @@ $users = json_decode($UserData, true);
 				<?php }
 				?>
 
+			<?php $permission = UserController::getUserPermissionByName('product', $id);
+				$permissionarr = json_decode($permission, true);
+				if ($permissionarr['success'] == 'true') { ?>
+					<li>
+						<a href="javascript:();" class="has-arrow">
+							<div class="parent-icon"><i class="fa fa-user-circle"></i>
+							</div>
+							<div class="menu-title">Product</div>
+						</a>
+						<ul>
+							<li> <a href="/productDetail"><i class="fa fa-angle-right"></i>Product Detail</a></li>
+							<li> <a href="/productCategory"><i class="fa fa-angle-right"></i>Product Category</a></li>
+							
+						</ul>
+					</li>
+				<?php }
+				?>
+
 			<?php $permission = UserController::getUserPermissionByName('employee', $id);
 				$permissionarr = json_decode($permission, true);
 				if ($permissionarr['success'] == 'true') { ?>
