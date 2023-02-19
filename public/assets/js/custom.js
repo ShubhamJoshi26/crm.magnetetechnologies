@@ -81,7 +81,27 @@ function deleteEmployee(id)
           }
     }
 }
-
+function deleteTicket(id)
+{
+    if(id!='')
+    {
+        if(!confirm("Do you want to delete this employee ?")) {
+            return false;
+          }
+          else
+          {
+            $.ajax({
+                url:'ticket/delete?id='+id,
+                type:'get',
+                success:function(suc)
+                {
+                    alert(suc);
+                    location.href='ticket';
+                }
+            })
+          }
+    }
+}
 function deleteModule(id)
 {
     if(id!='')
@@ -103,6 +123,7 @@ function deleteModule(id)
           }
     }
 }
+
 
 function deleteproductCategory(id)
 {
@@ -145,4 +166,27 @@ function deleteproductDetail(id)
             })
           }
     }
+function getAllNewTickets(type)
+{
+    $.ajax({
+        url: 'ticket/status?action=getTicket&sts='+type,
+        type:'get',
+        success:function(res)
+        {
+            $('#tickettable').html(res);
+        }
+    })
+}
+function getAllNewTicketsByUser(type)
+{
+    $.ajax({
+        url: '/ticket/status?action=getTicketByUser&sts='+type,
+        type:'get',
+        success:function(res)
+        {
+            console.log(res);
+            $('#tickettable').html(res);
+        }
+    })
+
 }

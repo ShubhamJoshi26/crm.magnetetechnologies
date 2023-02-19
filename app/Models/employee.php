@@ -17,6 +17,11 @@ class employee extends Model
         $data = DB::select('Select * from `employees`');
         return json_encode(array('success' => 'true', 'data' => $data, 'error_code' => '10001'));
     }
+    public static function getActiveRecords()
+    {
+        $data = DB::select('Select * from `employees` where `status`=1');
+        return json_encode(array('success' => 'true', 'data' => $data, 'error_code' => '10001'));
+    }
 
     public static function saveRecord($data)
     {

@@ -1,4 +1,5 @@
 <?php
+
 $check = session()->has('user_status');
 // echo $check;
 // die('dd');
@@ -47,6 +48,7 @@ $users = json_decode($UserData, true);
 	<link rel="stylesheet" href="{{URL::asset('assets/css/dark-theme.css')}}" />
 	<link rel="stylesheet" href="{{URL::asset('assets/css/semi-dark.css')}}" />
 	<link rel="stylesheet" href="{{URL::asset('assets/css/header-colors.css')}}" />
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<title>CRM - Magnete Technologies Pvt. Ltd.</title>
 </head>
 
@@ -144,7 +146,7 @@ $users = json_decode($UserData, true);
 							<div class="menu-title">Tasks</div>
 						</a>
 						<ul>
-							<li> <a href="#"><i class="fa fa-angle-right"></i>Running Task</a></li>
+							<li> <a href="/user/task"><i class="fa fa-angle-right"></i>My Task</a></li>
 							<li> <a href="#"><i class="fa fa-angle-right"></i>Archive Task</a></li>
 						</ul>
 					</li>
@@ -268,11 +270,11 @@ $users = json_decode($UserData, true);
 							<div class="menu-title">Tickets</div>
 						</a>
 						<ul>
-							<li> <a href="#"><i class="fa fa-angle-right"></i>All Tickets</a></li>
-							<li> <a href="#"><i class="fa fa-angle-right"></i>New Tickets</a></li>
-							<li> <a href="#"><i class="fa fa-angle-right"></i>Inprocess Tickets</a></li>
-							<li> <a href="#"><i class="fa fa-angle-right"></i>Closed Tickets</a></li>
-							<li> <a href="#"><i class="fa fa-angle-right"></i>Reopen Tickets</a></li>
+							<li> <a href="/ticket" ><i class="fa fa-angle-right"></i>All Tickets</a></li>
+							<li> <a href="javascript:void(0)" onclick="getAllNewTickets(1);"><i class="fa fa-angle-right"></i>New Tickets</a></li>
+							<li> <a href="javascript:void(0)" onclick="getAllNewTickets(2);"><i class="fa fa-angle-right"></i>Inprocess Tickets</a></li>
+							<li> <a href="javascript:void(0)" onclick="getAllNewTickets(4);"><i class="fa fa-angle-right"></i>Closed Tickets</a></li>
+							<li> <a href="javascript:void(0)" onclick="getAllNewTickets(5);"><i class="fa fa-angle-right"></i>Reopen Tickets</a></li>
 						</ul>
 					</li>
 				<?php }
@@ -307,7 +309,7 @@ $users = json_decode($UserData, true);
 							<div class="menu-title">Settings</div>
 						</a>
 						<ul>
-							<li> <a href="#"><i class="fa fa-angle-right"></i>Genaral Settings</a></li>
+							<li> <a href="/setting/ticket"><i class="fa fa-angle-right"></i>Ticket Settings</a></li>
 							<li> <a href="#"><i class="fa fa-angle-right"></i>Staff Settings</a></li>
 							<li> <a href="#"><i class="fa fa-angle-right"></i>Employees Settings</a></li>
 							<li> <a href="#"><i class="fa fa-angle-right"></i>Email Settings</a></li>
@@ -449,8 +451,8 @@ $users = json_decode($UserData, true);
 							</li>
 							<li> <a class="has-arrow" href="#">Manege Testimonials</a>
 								<ul>
-									<li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Add Testimonials</a></li>
-									<li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Edit Testimonials</a></li>
+									<li> <a href="/website/testimonial/list"><i class="bx bx-right-arrow-alt"></i>Testimonials List</a></li>
+									<li> <a href="/website/testimonial/add"><i class="bx bx-right-arrow-alt"></i>Add Testimonials</a></li>
 									<li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Delete Testimonials</a></li>
 									<li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Trash Testimonials</a></li>
 								</ul>
@@ -615,7 +617,7 @@ $users = json_decode($UserData, true);
 				$permissionarr = json_decode($permission, true);
 				if ($permissionarr['success'] == 'true') { ?>
 					<li>
-						<a href="email.php">
+						<a href="/email">
 							<div class="parent-icon"><i class="fa fa-envelope-o"></i>
 							</div>
 							<div class="menu-title">Mails</div>
@@ -1000,7 +1002,7 @@ $users = json_decode($UserData, true);
 										} ?>" class="user-img" alt="user avatar">
 							<div class="user-info ps-3">
 								<p class="user-name mb-0"><?php echo $users['data'][0]['name'] ?></p>
-								<p class="designattion mb-0"><?php echo $users['data'][0]['designation'] ?></p>
+								<p class="designattion mb-0"></p>
 							</div>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-end">

@@ -8,8 +8,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
+
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
+
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\TicketController;
+use App\Http\Controllers\WebsiteController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,32 +37,32 @@ Route::get('/Login',function(){
 Route::post('/UserLogin',[UserController::class,'Login']);
 Route::post('/CreateCustomer',[CustomerController::class,'CreateCustomer']);
 Route::get('/AddCustomer',function () {
-    return view('add-customer');
+    return view('/customer/add-customer');
 });
 Route::get('/Users',function(){
-    return view('userlist');
+    return view('/user/userlist');
 });
 Route::get('/UserProfile',function(){
-    return view('user-profile');
+    return view('/user/user-profile');
 });
 Route::post('/UpdateProfile',[UserController::class,'UpdateProfile']);
 Route::get('/CustomersList', function (){
-    return view('/customerlist');
+    return view('/customer/customerlist');
 });
 Route::get('/EditUser/{id}',function($id){
-    return view('edituser',['id'=>$id]);
+    return view('/user/edituser',['id'=>$id]);
 });
 Route::get('/AddUser',function(){
-    return view('adduser');
+    return view('/user/adduser');
 });
 Route::post('/CreateUser',[UserController::class,'CreateUser']);
 Route::get('/Logout',[UserController::class,'LogoutUser']);
 Route::post('/UpdateUser',[UserController::class,'UpdateUser']);
 Route::get('/Permissions',function(){
-    return view('permissions');
+    return view('/permission/permissions');
 });
 Route::post('/permission',function(){
-    return view('permission_ajax');
+    return view('/permission/permission_ajax');
 });
 Route::post('/UpdateUserPermission',[UserController::class,'UpdateUserPermissions']);
 
@@ -65,15 +72,29 @@ Route::any('/department/delete',[DepartmentController::class,'Delete']);
 Route::get('/designation',[DesignationController::class,'Index']);
 Route::any('/designation/create',[DesignationController::class,'Create']);
 Route::any('/designation/delete',[DesignationController::class,'Delete']);
+Route::get('/ticket',function(){return view('/ticket/allticket');});
+Route::any('/ticket/create',[TicketController::class,'create']);
+Route::any('/ticket/delete',[TicketController::class,'Delete']);
 Route::get('/employee',[EmployeeController::class,'Index']);
 Route::any('/employee/create',[EmployeeController::class,'Create']);
 Route::any('/employee/delete',[EmployeeController::class,'Delete']);
 Route::get('/module',[ModuleController::class,'Modules']);
 Route::any('/module/create',[ModuleController::class,'Create']);
 Route::any('/module/delete',[ModuleController::class,'Delete']);
+
 Route::get('/productCategory',[ProductCategoryController::class,'Index']);
 Route::any('/productCategory/create',[ProductCategoryController::class,'Create']);
 Route::any('/productCategory/delete',[ProductCategoryController::class,'Delete']);
 Route::get('/productDetail',[ProductController::class,'Index']);
 Route::any('/productDetail/create',[ProductController::class,'Create']);
 Route::any('/productDetail/delete',[ProductController::class,'Delete']);
+
+Route::any('/ticket/status',function(){return view('/ticket/ticket_ajax');});
+Route::get('/setting/ticket',function(){return view('/setting/ticketsetting');});
+Route::post('/setting/createticketsetting',[SettingsController::class,'CreateTicketSettings']);
+Route::any('/user/task',function(){return view('user/alltask');});
+Route::get('/website/testimonial/add',function(){return view('/website/testimonials/addtestimonials');});
+Route::post('/website/testimonials/add',[WebsiteController::class,'CreateTestimonials']);
+Route::any('/website/testimonial/list',function(){return view('/website/testimonials/alltestimonials');});
+Route::get('/email',function(){return view('/mail/mail');});
+
