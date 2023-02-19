@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\WebsiteController;
@@ -84,3 +85,5 @@ Route::get('/website/testimonial/add',function(){return view('/website/testimoni
 Route::post('/website/testimonials/add',[WebsiteController::class,'CreateTestimonials']);
 Route::any('/website/testimonial/list',function(){return view('/website/testimonials/alltestimonials');});
 Route::get('/email',function(){return view('/mail/mail');});
+Route::get('/payroll/employeeconfig',function(){return view('payroll/employeeconfig');});
+Route::get('/payroll/editconfig',function(){return view('/payroll/editconfig');});

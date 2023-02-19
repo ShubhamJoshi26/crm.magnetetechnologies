@@ -3,13 +3,14 @@
 
 use App\Models\testimonial;
 
-$testimonial = testimonial::getTestimonialById($_GET['id']);
+if(isset($_GET['id']) && $_GET['id']!='')
+{
+  $testimonial = testimonial::getTestimonialById($_GET['id']);
 $testimonialarr = json_decode($testimonial,true);
 if($testimonialarr['success']=='true')
 {
   $test = $testimonialarr['data'];
-  
-
+}
 }
 ?>
 <div class="page-wrapper">
