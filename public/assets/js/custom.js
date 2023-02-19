@@ -1,3 +1,5 @@
+// const { isNumber } = require("lodash");
+
 function EditPermission(id)
 {
  if(id!='')
@@ -189,4 +191,3 @@ function getAllNewTicketsByUser(type)
         }
     })
 
-}

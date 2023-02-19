@@ -8,20 +8,20 @@ use App\Http\Controllers\TicketController;
 
 $id = Session()->get('id');
 $alltickets = ticket::getTicketsByUserId($id);
+
 $ticketarr = json_decode($alltickets, true);
 $inprocessticketcount = 0;
 $newticketcount = 0;
 $holdticketcount = 0;
 $reopenticketcount = 0;
 $closeticketcount = 0;
-if($ticketarr['success']=='true')
+if( isset($ticketarr) && $ticketarr['success']=='true' && $ticketarr['data']!='')
 {
     foreach($ticketarr['data'] as $ticketcounts)
     {
         if($ticketcounts['status']==1)
         {
             $newticketcount++;
-            
         }
         else if($ticketcounts['status']==2)
         {

@@ -161,13 +161,13 @@ if ($permissionarr['success'] == 'false') { ?>
                   <label for="priority" class="form-label">Priority</label>
                   <select type="text" class="form-control" id="priority" name="priority">
                     <option value="0">--Select Status--</option>
-                    <option value="1" <?php if (isset($ticketdata) && !empty($ticketdata) && $ticketdata['category'] == "1") {
+                    <option value="1" <?php if (isset($ticketdata) && !empty($ticketdata) && $ticketdata['priority'] == "1") {
                                         echo 'selected';
                                       } ?>>Low</option>
-                    <option value="2" <?php if (isset($ticketdata) && !empty($ticketdata) && $ticketdata['category'] == "2") {
+                    <option value="2" <?php if (isset($ticketdata) && !empty($ticketdata) && $ticketdata['priority'] == "2") {
                                         echo 'selected';
                                       } ?>>Medium</option>
-                    <option value="3" <?php if (isset($ticketdata) && !empty($ticketdata) && $ticketdata['category'] == "3") {
+                    <option value="3" <?php if (isset($ticketdata) && !empty($ticketdata) && $ticketdata['priority'] == "3") {
                                         echo 'selected';
                                       } ?>>High</option>
                   </select>
@@ -247,12 +247,16 @@ if ($permissionarr['success'] == 'false') { ?>
                                                                                                                                                 echo $ticketdata['contact_email'];
                                                                                                                                               } ?>">
                 </div>
+                <div class="col-12 col-lg-12">
+                  <label for="attachment" class="form-label">Comment</label>
+                  <textarea class="form-control" type="text" id="comment" name="comment"></textarea>
+                </div>
                 <div class="col-12 col-lg-6">
                   <label for="attachment" class="form-label">attachment</label>
                   <input class="form-control" type="file" id="attachment" name="attachment">
                 </div>
                 <div class="col-12 col-lg-6">
-                  <label for="" class="form-label">Attachments</label>
+                  <!-- <label for="" class="form-label">Attachments</label> -->
                   <ul style="list-style: none;">
                     <?php
                     if (isset($attachmentsarr) && !empty($attachmentsarr)) {
@@ -264,10 +268,6 @@ if ($permissionarr['success'] == 'false') { ?>
                     }
                     ?>
                   </ul>
-                </div>
-                <div class="col-12 col-lg-6">
-                  <label for="attachment" class="form-label">Comment</label>
-                  <textarea class="form-control" type="text" id="comment" name="comment"></textarea>
                 </div>
               </div>
               <div class="table-responsive">

@@ -232,7 +232,7 @@ $users = json_decode($UserData, true);
 							<div class="menu-title">Payroll</div>
 						</a>
 						<ul>
-							<li> <a href="#"><i class="fa fa-angle-right"></i>Salary Template</a></li>
+							<li> <a href="/payroll/employeeconfig"><i class="fa fa-angle-right"></i>Employee Configuration</a></li>
 							<li> <a href="#"><i class="fa fa-angle-right"></i>Hourly</a></li>
 							<li> <a href="#"><i class="fa fa-angle-right"></i>Manage Salary</a></li>
 							<li> <a href="#"><i class="fa fa-angle-right"></i>Employee salary list</a></li>
@@ -726,7 +726,8 @@ $users = json_decode($UserData, true);
 								</div>
 							</li>
 							<li class="nav-item dropdown dropdown-large">
-								<a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span class="alert-count">7</span>
+								<a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									 <!-- <span class="alert-count"></span> -->
 									<i class='bx bx-bell'></i>
 								</a>
 								<div class="dropdown-menu dropdown-menu-end">
@@ -842,7 +843,8 @@ $users = json_decode($UserData, true);
 								</div>
 							</li>
 							<li class="nav-item dropdown dropdown-large">
-								<a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span class="alert-count">8</span>
+								<a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 
+									<!-- <span class="alert-count"></span> -->
 									<i class='bx bx-comment'></i>
 								</a>
 								<div class="dropdown-menu dropdown-menu-end">
@@ -1008,13 +1010,7 @@ $users = json_decode($UserData, true);
 						<ul class="dropdown-menu dropdown-menu-end">
 							<li><a class="dropdown-item" href="/UserProfile"><i class="bx bx-user"></i><span>Profile</span></a>
 							</li>
-							<li><a class="dropdown-item" href="javascript:;"><i class="bx bx-cog"></i><span>Settings</span></a>
-							</li>
-							<li><a class="dropdown-item" href="javascript:;"><i class='bx bx-home-circle'></i><span>Dashboard</span></a>
-							</li>
-							<li><a class="dropdown-item" href="javascript:;"><i class='bx bx-dollar-circle'></i><span>Earnings</span></a>
-							</li>
-							<li><a class="dropdown-item" href="javascript:;"><i class='bx bx-download'></i><span>Downloads</span></a>
+							<li><a class="dropdown-item" href="/"><i class='bx bx-home-circle'></i><span>Dashboard</span></a>
 							</li>
 							<li>
 								<div class="dropdown-divider mb-0"></div>
