@@ -8,10 +8,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
+
 use App\Http\Controllers\PayrollController;
+
+
+use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\ProductController;
+
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\WebsiteController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -77,6 +84,14 @@ Route::any('/employee/delete',[EmployeeController::class,'Delete']);
 Route::get('/module',[ModuleController::class,'Modules']);
 Route::any('/module/create',[ModuleController::class,'Create']);
 Route::any('/module/delete',[ModuleController::class,'Delete']);
+
+Route::get('/productCategory',[ProductCategoryController::class,'Index']);
+Route::any('/productCategory/create',[ProductCategoryController::class,'Create']);
+Route::any('/productCategory/delete',[ProductCategoryController::class,'Delete']);
+Route::get('/productDetail',[ProductController::class,'Index']);
+Route::any('/productDetail/create',[ProductController::class,'Create']);
+Route::any('/productDetail/delete',[ProductController::class,'Delete']);
+
 Route::any('/ticket/status',function(){return view('/ticket/ticket_ajax');});
 Route::get('/setting/ticket',function(){return view('/setting/ticketsetting');});
 Route::post('/setting/createticketsetting',[SettingsController::class,'CreateTicketSettings']);
@@ -85,5 +100,7 @@ Route::get('/website/testimonial/add',function(){return view('/website/testimoni
 Route::post('/website/testimonials/add',[WebsiteController::class,'CreateTestimonials']);
 Route::any('/website/testimonial/list',function(){return view('/website/testimonials/alltestimonials');});
 Route::get('/email',function(){return view('/mail/mail');});
+
 Route::get('/payroll/employeeconfig',function(){return view('payroll/employeeconfig');});
 Route::get('/payroll/editconfig',function(){return view('/payroll/editconfig');});
+
