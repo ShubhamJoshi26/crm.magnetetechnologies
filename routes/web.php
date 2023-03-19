@@ -103,4 +103,3 @@ Route::get('/email',function(){return view('/mail/mail');});
 
 Route::get('/payroll/employeeconfig',function(){return view('payroll/employeeconfig');});
 Route::get('/payroll/editconfig',function(){return view('/payroll/editconfig');});
-
