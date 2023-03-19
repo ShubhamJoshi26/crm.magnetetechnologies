@@ -52,8 +52,8 @@ Route::post('/UpdateProfile',[UserController::class,'UpdateProfile']);
 Route::get('/CustomersList', function (){
     return view('/customer/customerlist');
 });
-Route::get('/EditUser/{id}',function($id){
-    return view('/user/edituser',['id'=>$id]);
+Route::get('/EditUser/{uid}',function($uid){
+    return view('/user/edituser',['uid'=>$uid]);
 });
 Route::get('/AddUser',function(){
     return view('/user/adduser');

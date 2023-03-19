@@ -21,7 +21,7 @@ use Illuminate\Contracts\Encryption\DecryptException;
   
 //     $users = '';
 // }
-$UserData = UserController::getUserById($id);
+$UserData = UserController::getUserById($uid);
 $usersdata = json_decode($UserData,true);
 if($usersdata['success']=='true')
 {
