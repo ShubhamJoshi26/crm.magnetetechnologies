@@ -4,6 +4,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\SalaryConfigurationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -101,6 +102,6 @@ Route::post('/website/testimonials/add',[WebsiteController::class,'CreateTestimo
 Route::any('/website/testimonial/list',function(){return view('/website/testimonials/alltestimonials');});
 Route::get('/email',function(){return view('/mail/mail');});
 
-Route::get('/payroll/employeeconfig',function(){return view('payroll/employeeconfig');});
-Route::get('/payroll/editconfig',function(){return view('/payroll/editconfig');});
+Route::get('/salary-configuration',[SalaryConfigurationController::class,'index']);
+Route::any('/salary-configuration/editconfig/{id}',[SalaryConfigurationController::class,'editconfig']);
 

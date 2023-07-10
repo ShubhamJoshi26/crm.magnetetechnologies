@@ -232,7 +232,7 @@ $users = json_decode($UserData, true);
 							<div class="menu-title">Payroll</div>
 						</a>
 						<ul>
-							<li> <a href="/payroll/employeeconfig"><i class="fa fa-angle-right"></i>Employee Configuration</a></li>
+							<li> <a href="/salary-configuration"><i class="fa fa-angle-right"></i>Employee Configuration</a></li>
 							<li> <a href="#"><i class="fa fa-angle-right"></i>Hourly</a></li>
 							<li> <a href="#"><i class="fa fa-angle-right"></i>Manage Salary</a></li>
 							<li> <a href="#"><i class="fa fa-angle-right"></i>Employee salary list</a></li>

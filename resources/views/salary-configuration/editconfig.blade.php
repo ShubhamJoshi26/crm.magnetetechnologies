@@ -97,7 +97,7 @@
             <div class="card-body">
                 <form action="" method="post" enctype="multipart/form-data">
                 @csrf
-				<input type="hidden" id="id" name="id" value="<?php echo $_GET['id'];?>">
+				<input type="hidden" id="employee_id" name="employee_id" value="<?php echo $data['employee_id'];?>">
                 <div class="row g-3">
                     <div class="col-12 col-lg-6">
                         <label for="" class="form-label">Total CTC</label>
@@ -118,67 +118,67 @@
 									</thead>
 									<tbody>
 										<tr>
-											<th scope="row"><input type="checkbox" name="basic_box" id="basic_box"></th>
+											<th scope="row"><input type="checkbox" name="box[basic]" id="basic_box"></th>
 											<td>Basic</td>
 											<td><div class="row"><div class="col-md-3" style="display: flex;"><input type="text" name="basic_per" id="basic_per" class="form-control"><span>%</span></div></div></td>
 											<td><input type="text" name="basic_amount" id="basic_amount" class="form-control" readonly></td>
 										</tr>
 										<tr>
-											<th scope="row"><input type="checkbox" name="da_box" id="da_box"></th>
+											<th scope="row"><input type="checkbox" name="box[da]" id="da_box"></th>
 											<td>Dearness Allowance (DA)</td>
 											<td><div class="row"><div class="col-md-3" style="display: flex;"><input type="text" name="da_percent" id="da_percent" class="form-control"><span>%</span></div></div></td>
 											<td><input type="text" name="da_amount" id="da_amount" class="form-control" readonly></td>
 										</tr>
 										<tr>
-											<th scope="row"><input type="checkbox" name="hra_box" id="hra_box"></th>
+											<th scope="row"><input type="checkbox" name="box[hra]" id="hra_box"></th>
 											<td>House Rent Allowance (HRA)</td>
 											<td><div class="row"><div class="col-md-3" style="display: flex;"><input type="text" name="hra_percent" id="hra_percent" class="form-control"><span>%</span></div></div></td>
                                             <td><input type="text" name="hra_amount" id="hra_amount" class="form-control" readonly></td>
 										</tr>
 										<tr>
-											<th scope="row"><input type="checkbox" name="esic_box" id="esic_box"></th>
+											<th scope="row"><input type="checkbox" name="box[esic]" id="esic_box"></th>
 											<td>ESIC</td>
 											<td><div class="row"><div class="col-md-3" style="display: flex;"><input type="text" name="esic_percent" id="esic_percent" class="form-control"><span>%</span></div></div></td>
                                             <td><input type="text" name="esic_amount" id="esic_amount" class="form-control" readonly></td>
 										</tr>
 										<tr>
-											<th scope="row"><input type="checkbox" name="pf_box" id="pf_box"></th>
+											<th scope="row"><input type="checkbox" name="box[pf]" id="pf_box"></th>
 											<td>PF Employee</td>
 											<td><div class="row"><div class="col-md-3" style="display: flex;"><input type="text" name="pf_percent" id="pf_percent" class="form-control"><span>%</span></div></div></td>
                                             <td><input type="text" name="pf_amount" id="pf_amount" class="form-control" readonly></td>
 										</tr>
 										<tr>
-											<th scope="row"><input type="checkbox" name="epf_box" id="epf_box"></th>
+											<th scope="row"><input type="checkbox" name="box[epf]" id="epf_box"></th>
 											<td>PF Employeer</td>
 											<td><div class="row"><div class="col-md-3" style="display: flex;"><input type="text" name="epf_percent" id="epf_percent" class="form-control"><span>%</span></div></div></td>
                                             <td><input type="text" name="epf_amount" id="epf_amount" class="form-control" readonly></td>
 										</tr>
                                         <tr>
-											<th scope="row"><input type="checkbox" name="ca_box" id="ca_box"></th>
+											<th scope="row"><input type="checkbox" name="box[ca]" id="ca_box"></th>
 											<td>Conveyance Allowance (CA)</td>
 											<td><div class="row"><div class="col-md-3" style="display: flex;"><input type="text" name="ca_percent" id="ca_percent" class="form-control"><span>%</span></div></div></td>
                                             <td><input type="text" name="ca_amount" id="ca_amount" class="form-control" readonly></td>
 										</tr>
 										<tr>
-											<th scope="row"><input type="checkbox" name="ma_box" id="ma_box"></th>
+											<th scope="row"><input type="checkbox" name="box[ma]" id="ma_box"></th>
 											<td>Medical Allowance (MA)</td>
 											<td><div class="row"><div class="col-md-3" style="display: flex;"><input type="text" name="ma_percent" id="ma_percent" class="form-control"><span>%</span></div></div></td>
                                             <td><input type="text" name="ma_amount" id="ma_amount" class="form-control" readonly></td>
 										</tr>
 										<tr>
-											<th scope="row"><input type="checkbox" name="lta_box" id="lta_box"></th>
+											<th scope="row"><input type="checkbox" name="box[lta]" id="lta_box"></th>
 											<td>LTA</td>
 											<td><div class="row"><div class="col-md-3" style="display: flex;"><input type="text" name="lta_percent" id="lta_percent" class="form-control"><span>%</span></div></div></td>
                                             <td><input type="text" name="lta_amount" id="lta_amount" class="form-control" readonly></td>
 										</tr>
 										<tr>
-											<th scope="row"><input type="checkbox" name="gratuity_box" id="gratuity_box"></th>
+											<th scope="row"><input type="checkbox" name="box[gratuity]" id="gratuity_box"></th>
 											<td>Gratuity</td>
 											<td><div class="row"><div class="col-md-3" style="display: flex;"><input type="text" name="gratuity_percent" id="gratuity_percent" class="form-control"><span>%</span></div></div></td>
                                             <td><input type="text" name="gratuity_amount" id="gratuity_amount" class="form-control" readonly></td>
 										</tr>
 										<tr>
-											<th scope="row"><input type="checkbox" name="vr_box" id="vr_box"></th>
+											<th scope="row"><input type="checkbox" name="box[vr]" id="vr_box"></th>
 											<td>Variance</td>
 											<td><div class="row"><div class="col-md-3" style="display: flex;"><input type="text" name="vr_percent" id="vr_percent" class="form-control"><span>%</span></div></div></td>
                                             <td><input type="text" name="variance_amount" id="variance_amount" class="form-control" readonly></td>
