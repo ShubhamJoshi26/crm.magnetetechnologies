@@ -53,8 +53,8 @@ Route::post('/UpdateProfile',[UserController::class,'UpdateProfile']);
 Route::get('/CustomersList', function (){
     return view('/customer/customerlist');
 });
-Route::get('/EditUser/{id}',function($id){
-    return view('/user/edituser',['id'=>$id]);
+Route::get('/EditUser/{uid}',function($uid){
+    return view('/user/edituser',['uid'=>$uid]);
 });
 Route::get('/AddUser',function(){
     return view('/user/adduser');
@@ -105,3 +105,5 @@ Route::get('/email',function(){return view('/mail/mail');});
 Route::get('/salary-configuration',[SalaryConfigurationController::class,'index']);
 Route::any('/salary-configuration/editconfig/{id}',[SalaryConfigurationController::class,'editconfig']);
 
+Route::get('/payroll/employeeconfig',function(){return view('payroll/employeeconfig');});
+Route::get('/payroll/editconfig',function(){return view('/payroll/editconfig');});

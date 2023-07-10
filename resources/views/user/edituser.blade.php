@@ -14,14 +14,8 @@ $permissionarr = json_decode($permission, true);
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
-// print_r($id);die('ddddddd');
-// try {
-//     $id = Crypt::decryptString($id);
-// } catch (DecryptException $e) {
-  
-//     $users = '';
-// }
-$UserData = UserController::getUserById($id);
+
+$UserData = UserController::getUserById($uid);
 $usersdata = json_decode($UserData,true);
 if($usersdata['success']=='true')
 {
